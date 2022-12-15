@@ -1,0 +1,193 @@
+
+
+
+
+
+<header class="ltn__header-area ltn__header-3">       
+    <!-- ltn__header-top-area start -->
+    <div class="ltn__header-top-area border-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="ltn__top-bar-menu">
+                        <ul>
+                            <li><a href="mailto:adwaithrrajesh.k@gmail.com"><i class="icon-mail"></i> adwaithrrajesh.k@gmail.com</a></li>
+                            <li><a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="top-bar-right text-right text-end">
+                        <div class="ltn__top-bar-menu">
+                            <ul>
+                                <li>
+                                    <!-- ltn__social-media -->
+                                    <div class="ltn__social-media">
+                                        <ul>
+                                            <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                            
+                                            <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ltn__header-top-area end --> 
+
+
+
+
+
+
+    <!-- ltn__header-middle-area start -->
+    <div class="ltn__header-middle-area">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-logo">
+                        <a href="/"><img src="img/logo.png" alt="Logo"></a>
+                    </div>
+                </div>
+                <div class="col header-contact-serarch-column d-none d-lg-block">
+                    <div class="header-contact-search">
+                        <!-- header-feature-item -->
+                        <div class="header-feature-item">
+                            <div class="header-feature-icon">
+                                <i class="icon-call"></i>
+                            </div>
+                            <div class="header-feature-info">
+                                <h6>Phone</h6>
+                                <p><a href="tel:7994734828">+91 79934734828</a></p>
+                            </div>
+                        </div>
+                        <!-- header-search-2 -->
+                        <div class="header-search-2">
+                            <form id="#123" method="get"  action="#">
+                                <input type="text" name="search" value="" placeholder="Search here..."/>
+                                <button type="submit">
+                                    <span><img src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png"  style="height:20px;"    alt="search icon"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- header-options -->
+                    <div class="ltn__header-options">
+                        <ul>
+                            <li class="d-none">
+                                <!-- ltn__currency-menu -->
+                                <div class="ltn__drop-menu ltn__currency-menu">
+                                    <ul>
+                                        <li><a href="#" class="dropdown-toggle"><span class="active-currency">USD</span></a>
+                                            <ul>
+                                                <li><a href="login.html">USD - US Dollar</a></li>
+                                                <li><a href="wishlist.html">CAD - Canada Dollar</a></li>
+                                                <li><a href="register.html">EUR - Euro</a></li>
+                                                <li><a href="account.html">GBP - British Pound</a></li>
+                                                <li><a href="wishlist.html">INR - Indian Rupee</a></li>
+                                                <li><a href="wishlist.html">BDT - Bangladesh Taka</a></li>
+                                                <li><a href="wishlist.html">JPY - Japan Yen</a></li>
+                                                <li><a href="wishlist.html">AUD - Australian Dollar</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="d-lg-none">
+                                <!-- header-search-1 -->
+                                <div class="header-search-wrap">
+                                    <div class="header-search-1">
+                                        <div class="search-icon">
+                                            <i class="icon-search  for-search-show"></i>
+                                            <i class="icon-cancel  for-search-close"></i>
+                                        </div>
+                                    </div>
+                                    <div class="header-search-1-form">
+                                        <form id="#" method="get"  action="#">
+                                            <input type="text" name="search" value="" placeholder="Search here..."/>
+                                            <button type="submit">
+                                                <span><i class="icon-search"></i></span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="d-none---"> 
+                                <!-- user-menu -->
+                                <div class="ltn__drop-menu user-menu">
+                                    <ul>
+                                        <li>
+                                         <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" style="height:30px; margin-bottom: 18px;"  alt="user_icon"></a>
+
+                                            <ul>
+                                                <li><a href="account.html">My Account</a></li>
+                                                <li><a href="wishlist.html">Wishlist</a></li>
+                                                <% if (user) { %>
+                                                    <li><a href="/"><%=user.Email%></a></li>
+                                                    <li><a href="/logout">Logout</a></li>
+                                                    <%} else { %>
+                                                        <li><a href="/login">Login</a></li>
+                                                        <li><a href="/register">Register</a></li>
+                                                    <% } %>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <!-- mini-cart 2 -->
+                                <div class="mini-cart-icon mini-cart-icon-2">
+                                    <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                                        <span class="mini-cart-icon">
+                                        
+                                        <img src="https://visualpharm.com/assets/482/Shopping%20Cart-595b40b65ba036ed117d241c.svg" style="height: 30px;"  alt="Cart image">
+                                            
+                                        </span>
+                                        <h6><span>Your Cart</span> <span class="ltn__secondary-color">$89.25</span></h6>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ltn__header-middle-area end -->
+    <!-- header-bottom-area start -->
+    <div class="header-bottom-area ltn__border-top ltn__header-sticky  ltn__sticky-bg-white--- ltn__sticky-bg-secondary ltn__secondary-bg section-bg-1 menu-color-white d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col header-menu-column justify-content-center">
+                    <div class="sticky-logo">
+                        <div class="site-logo">
+                            <a href="index.html"><img src="img/logo-3.png" alt="Logo"></a>
+                        </div>
+                    </div>
+                    <div class="header-menu header-menu-2">
+                        <nav>
+                            <div class="ltn__main-menu">
+                                <ul>
+                                    <li ><a href="/">Home</a> </li>
+                                    <li><a href="#">About</a>
+                                    </li>
+                                    <li><a href="/shop">Shop</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header-bottom-area end -->
+</header>

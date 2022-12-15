@@ -1,0 +1,153 @@
+
+  <body>
+
+    <%- include('../layouts/layout') -%>
+
+
+
+
+
+
+
+
+
+
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+
+
+      <%- include('../partials/sidebar') -%>
+
+
+    
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_navbar.html -->
+
+
+      <%- include('../partials/navbar') -%>
+
+
+
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Edit Products </h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Products</h4>
+                    </p>
+                    <div class="table-responsive">
+
+
+                      <!-- starts here -->
+                    
+                      <div class="container tm-mt-big tm-mb-big">
+                        <div class="row">
+                          <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+                            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                              <div class="row">
+                                <div class="col-12">
+                                  <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+                                </div>
+                              </div>
+                              <div class="row tm-edit-product-row">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
+                                  <br>
+
+                                 
+
+                                 <form action="/admin/update_product/<%=edit_product._id%>" method="post" enctype="multipart/form-data">
+
+                                  <input type="text"  name="ProductName" value="<%=edit_product.ProductName%>" placeholder="Product Name" required>
+                                  <br>
+                                  <br>
+                                  <textarea  rows="3"  name="Discription"  placeholder="discription" style="height: 100px;" required></textarea>
+                                  <br>
+                                  <br>
+                                  <input type="number" name="Price" value="<%=edit_product.Price%>" placeholder="Price" style="width:150px;" required>
+                                  <br>
+                                  <br>
+                                  <input type="number" name="DiscountPrice" value="<%=edit_product.DiscountPrice%>" placeholder="Discount Price" style="width:150px;" required>
+                                  <br>
+                                  <br>
+
+                                  <select name="Category" class="btn-primary">
+                                    <option><%=edit_product.Category%></option>
+                                    <option>Mobile</option>
+                                    <option>Laptop</option>
+                                    <option>Gadgets</option>
+                                  </select>
+
+                                  <br>
+                                  <br>
+                                  <input type="file" multiple name="Image">
+                                  <br><br>
+
+                                  <input type="submit" value="Update Product" class="btn-primary">
+
+
+                                 </form>
+
+                               
+                                  
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Ends here -->
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Style -->
+
+    <style>
+      input {
+  width: 100%;
+  background-color: #161617 ;
+  color: whitesmoke;
+  border: 0;
+  height: 45px;
+  
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+textarea{
+  width: 100%;
+  background-color: #161617 ;
+  color: whitesmoke;
+  border: 0;
+  height: 45px;
+}
+
+    </style>
+
+
+
+   
+
+  </body>
