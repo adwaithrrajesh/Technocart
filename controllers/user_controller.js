@@ -75,8 +75,7 @@ module.exports = {
     let login = req.session.loggedIn;
     let user = req.session.user;
     let products = await product_model.find();
-    let Banner = await banner_model.find()
-    console.log(Banner)
+    let Banner = await banner_model.find();
     if (login) {
       let cart = await cart_model
         .findOne({ UserId: req.session.user._id })
@@ -146,7 +145,6 @@ module.exports = {
     otp_code = otp_code.join();
     otp_code = otp_code.split(",").join("");
     let phone_num = req.session.Phone_Number;
-    console.log(otp_code);
     verify(phone_num, otp_code).then((status) => {
       if (status) {
         res.render("users/ForgotPassword/change_password");

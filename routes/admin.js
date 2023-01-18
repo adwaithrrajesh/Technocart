@@ -55,6 +55,8 @@ const ProductController = require('../controllers/product_controller')
   router.post('/UnHideBanner',Controller.UnHideBanner)
   router.post('/DeleteBanner',Controller.DeleteBanner)
   router.post('/GetPaymentDetails',Controller.PaymentDetails)
+  router.post('/add_to_trending',Controller.AddtoTrending)
+  router.post('/remove_trending',Controller.RemoveTrending)
 
 
 

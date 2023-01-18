@@ -218,5 +218,17 @@ module.exports = {
       let OnlinePayment = await order_model.find({PaymentMethod:'Online Payment'}).countDocuments()
       let CashOnDelivery = await order_model.find({PaymentMethod:'Cash on Delivery'}).countDocuments()
       res.json({OnlinePayment,CashOnDelivery})
+    },
+    AddtoTrending:(req,res)=>{
+      let ProductId = req.body.ProductId
+      adminHelper.AddToTrend(ProductId).then(()=>{
+        res.json(true)
+      })
+    },
+    RemoveTrending:(req,res)=>{
+      let Product = req.body.ProductId
+      adminHelper.RemovefromTrend(Product).then(()=>{
+        res.json(true)
+      })
     }
 }

@@ -237,9 +237,7 @@ module.exports={
             let User = await user_model.findOne({_id:Order.UserId})
             // Find Address
             let value = Order.Address
-            console.log(value,"Original Address Value")
             let Check = await address_model.findOne({})  
-            console.log(Check,"Finded")
             resolve({Products,User})
         })
     },
@@ -247,6 +245,26 @@ module.exports={
         return new Promise(async(resolve,reject)=>{
             let Admins = await admin_reg_model.find({Allow:true}).limit(5)
             resolve(Admins)
+        })
+    },
+    AddToTrend:(ProductId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await product_model.updateOne({_id:ProductId},{
+                $set:{
+                    Trending:true
+                }
+            })
+            resolve()
+        })
+    },
+    RemovefromTrend:(ProductId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await product_model.updateOne({_id:ProductId},{
+                $set:{
+                    Trending:false
+                }
+            })
+            resolve()
         })
     }
 

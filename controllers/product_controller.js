@@ -12,24 +12,17 @@ const cart_model = require('../model/cart_model')
 module.exports={
 
   // Insert Product
-    InsertProduct:(req,res)=>{
-      let trend = req.body.Trending
+    InsertProduct:(req,res)=>{  
         let product = {
           ProductName:req.body.ProductName,
           Image:req.files,
           Discription:req.body.Discription,
           Price:req.body.Price,
           DiscountPrice:req.body.DiscountPrice,
-          Category:req.body.Category,
-          Trending:trend
+          Category:req.body.Category
         }
         productHelpers.addProduct(product).then((status)=>{
-          if(status){
-            console.log('Data Inserted Successfully')
             res.redirect('/admin/add_products')
-          }else{
-            console.log('Unable to insert Data')
-          }
         })
       },
       // Hide Product
@@ -64,7 +57,6 @@ module.exports={
           Category:req.body.Category
         }
         productHelpers.updateProduct(productid,product).then((product_update)=>{
-          console.log(product_update,"Product updated successfully")
           res.redirect('/admin/product_management')
         })
       },
