@@ -34,6 +34,10 @@ let Order_Collection = new Schema({
     },
     OrderStatus:{
         type:String
+    },
+    Date:{
+        type:Date,
+        default : Date.now()
     }
 })
 

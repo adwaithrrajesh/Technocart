@@ -118,7 +118,7 @@
               <div class="col-sm-4 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h5>Total Delivery</h5>
+                    <h5>Delevered </h5>
                     <div class="row">
                       <div class="col-8 col-sm-12 col-xl-8 my-auto">
                         <div class="d-flex d-sm-block d-md-flex align-items-center">
@@ -132,7 +132,78 @@
                   </div>
                 </div>
               </div>
+
+              <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Transaction History</h4>
+                    <canvas id="transaction-history" class="transaction-chart"></canvas>
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                      <div class="text-md-center text-xl-left">
+                        <h6 class="mb-1">Online Payment</h6>
+                      </div>
+                      <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                        <h6 class="font-weight-bold mb-0" id="online"></h6>
+                      </div>
+                    </div>
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                      <div class="text-md-center text-xl-left">
+                        <h6 class="mb-1">Cash On Delevery</h6>
+                      </div>
+                      <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                        <h6 class="font-weight-bold mb-0" id="cash">  </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+               <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                      <h4 class="card-title mb-1">Allowed Admins</h4>
+                      <p class="text-muted mb-1">Admins Who has Access to the Admin Panel</p>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="preview-list">
+
+                          <% Admins.forEach(function(value){%>
+                          <div class="preview-item border-bottom">
+                            <div class="preview-thumbnail">
+                              <div class="preview-icon bg-primary">
+                                <i class="mdi mdi-account-circle"></i>
+                              </div>
+                            </div>
+                            <div class="preview-item-content d-sm-flex flex-grow">
+                              <div class="flex-grow">
+                                <h6 class="preview-subject"><%=value.FirstName%></h6>
+                                <p class="text-muted mb-0"><%=value.Email%></p>
+                              </div>
+                            </div>
+                          </div>
+                          <%})%>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            
+
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Sales</h4>
+                  <div class="chart-container">
+                    <canvas id="chart"></canvas>
+                </div>
+                </div>
+              </div>
+            </div>
+
           <!-- content-wrapper ends -->
         </div>
         <!-- main-panel ends -->
@@ -140,3 +211,340 @@
       <!-- page-body-wrapper ends -->
     </div>
   </body>
+
+
+  <style>
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 70vw;
+}
+  </style>
+
+  <script>
+    var data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May"],
+  datasets: [{
+    label: "Sales Report  ",
+    backgroundColor: "rgba(255,99,132,0.2)",
+    borderColor: "rgba(255,99,132,1)",
+    borderWidth: 2,
+    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+    hoverBorderColor: "rgba(255,99,132,1)",
+    data: [65, 59, 81, 56, 55, 0],
+  }]
+};
+
+var options = {
+  maintainAspectRatio: false,
+  scales: {
+    y: {
+      stacked: true,
+      grid: {
+        display: true,
+        color: "rgba(255,99,132,0.2)"
+      }
+    },
+    x: {
+      grid: {
+        display: false
+      }
+    }
+  }
+};
+
+new Chart('chart', {
+  type: 'bar',
+  options: options,
+  data: data
+});
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <!-- Script for Payment Details -->
+  <script>
+    (function($) {
+
+       $.ajax({
+          url: "/admin/GetPaymentDetails",
+          method: "post",
+          success: (response) => {
+            let online = response.OnlinePayment
+            let Cash = response.CashOnDelivery
+            document.getElementById('online').innerHTML = online
+            document.getElementById('cash').innerHTML = Cash
+  'use strict';
+  $.fn.andSelf = function() {
+    return this.addBack.apply(this, arguments);
+  }
+  $(function() {
+    if ($("#currentBalanceCircle").length) {
+      var bar = new ProgressBar.Circle(currentBalanceCircle, {
+        color: '#000',
+        // This has to be the same size as the maximum width to
+        // prevent clipping
+        strokeWidth: 12,
+        trailWidth: 12,
+        trailColor: '#0d0d0d',
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+          autoStyleContainer: false
+        },
+        from: { color: '#d53f3a', width: 12 },
+        to: { color: '#d53f3a', width: 12 },
+        // Set default step function for all animate calls
+        step: function(state, circle) {
+          circle.path.setAttribute('stroke', state.color);
+          circle.path.setAttribute('stroke-width', state.width);
+      
+          var value = Math.round(circle.value() * 100);
+          circle.setText('');
+      
+        }
+      });
+
+      bar.text.style.fontSize = '1.5rem';
+      bar.animate(0.4);  // Number from 0.0 to 1.0
+    }
+    if($('#audience-map').length) {
+      $('#audience-map').vectorMap({
+        map: 'world_mill_en',
+        backgroundColor: 'transparent',
+        panOnDrag: true,
+        focusOn: {
+          x: 0.5,
+          y: 0.5,
+          scale: 1,
+          animate: true
+        },
+        series: {
+          regions: [{
+            scale: ['#3d3c3c', '#f2f2f2'],
+            normalizeFunction: 'polynomial',
+            values: {
+
+              "BZ": 75.00,
+              "US": 56.25,
+              "AU": 15.45,
+              "GB": 25.00,
+              "RO": 10.25,
+              "GE": 33.25
+            }
+          }]
+        }
+      });
+    }
+    if ($("#transaction-history").length) {
+
+      var areaData = {
+        labels: ["OnlinePayment","Cash on Delivery"],
+        datasets: [{
+            data: [online, Cash],
+            backgroundColor: [
+              "#00d25b","#BBFFFF"
+            ]
+          }
+        ]
+      };
+      var areaOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        segmentShowStroke: false,
+        cutoutPercentage: 70,
+        elements: {
+          arc: {
+              borderWidth: 0
+          }
+        },      
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        }
+      }
+      var transactionhistoryChartPlugins = {
+        beforeDraw: function(chart) {
+          var width = chart.chart.width,
+              height = chart.chart.height,
+              ctx = chart.chart.ctx;
+      
+          ctx.restore();
+          var fontSize = 1;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#ffffff";
+      
+          var text = "Payment Details", 
+              textX = Math.round((width - ctx.measureText(text).width) / 2),
+              textY = height / 2.4;
+      
+          ctx.fillText(text, textX, textY);
+
+          ctx.restore();
+          var fontSize = 0.75;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#6c7293";
+
+          var texts = "", 
+              textsX = Math.round((width - ctx.measureText(text).width) / 1.93),
+              textsY = height / 1.7;
+      
+          ctx.fillText(texts, textsX, textsY);
+          ctx.save();
+        }
+      }
+      var transactionhistoryChartCanvas = $("#transaction-history").get(0).getContext("2d");
+      var transactionhistoryChart = new Chart(transactionhistoryChartCanvas, {
+        type: 'doughnut',
+        data: areaData,
+        options: areaOptions,
+        plugins: transactionhistoryChartPlugins
+      });
+    }
+    if ($("#transaction-history-arabic").length) {
+      var areaData = {
+        labels: ["Paypal", "Stripe","Cash"],
+        datasets: [{
+            data: [100, 1, 1],
+            backgroundColor: [
+              "#111111","#00d25b","#ffab00"
+            ]
+          }
+        ]
+      };
+      var areaOptions = {
+        responsive: true,
+        maintainAspectRatio: true,
+        segmentShowStroke: false,
+        cutoutPercentage: 70,
+        elements: {
+          arc: {
+              borderWidth: 0
+          }
+        },      
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        }
+      }
+      var transactionhistoryChartPlugins = {
+        beforeDraw: function(chart) {
+          var width = chart.chart.width,
+              height = chart.chart.height,
+              ctx = chart.chart.ctx;
+      
+          ctx.restore();
+          var fontSize = 1;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#ffffff";
+      
+          var text = "$1200", 
+              textX = Math.round((width - ctx.measureText(text).width) / 2),
+              textY = height / 2.4;
+      
+          ctx.fillText(text, textX, textY);
+
+          ctx.restore();
+          var fontSize = 0.75;
+          ctx.font = fontSize + "rem sans-serif";
+          ctx.textAlign = 'left';
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#6c7293";
+
+          var texts = "مجموع", 
+              textsX = Math.round((width - ctx.measureText(text).width) / 1.93),
+              textsY = height / 1.7;
+      
+          ctx.fillText(texts, textsX, textsY);
+          ctx.save();
+        }
+      }
+      var transactionhistoryChartCanvas = $("#transaction-history-arabic").get(0).getContext("2d");
+      var transactionhistoryChart = new Chart(transactionhistoryChartCanvas, {
+        type: 'doughnut',
+        data: areaData,
+        options: areaOptions,
+        plugins: transactionhistoryChartPlugins
+      });
+    }
+    if ($('#owl-carousel-basic').length) {
+      $('#owl-carousel-basic').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 4500,
+        navText: ["<i class='mdi mdi-chevron-left'></i>", "<i class='mdi mdi-chevron-right'></i>"],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
+          }
+        }
+      });
+    }
+    var isrtl = $("body").hasClass("rtl");
+    if ($('#owl-carousel-rtl').length) {
+      $('#owl-carousel-rtl').owlCarousel({
+        loop: true,
+        margin: 10,
+        dots: false,
+        nav: true,
+        rtl: isrtl,
+        autoplay: true,
+        autoplayTimeout: 4500,
+        navText: ["<i class='mdi mdi-chevron-right'></i>", "<i class='mdi mdi-chevron-left'></i>"],
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
+          }
+        }
+      });
+    }
+    });
+  },
+        });
+})(jQuery);
+  </script>

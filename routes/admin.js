@@ -26,6 +26,9 @@ const ProductController = require('../controllers/product_controller')
   router.get('/Banner_Management',admin_auth,Controller.Banner)
   router.get('/CouponManagement',Controller.CouponManagement)
   router.get('/CreateCoupon',Controller.AddCoupon)
+  router.get('/add-banner',Controller.Addbanner)
+  router.get('/EditBanner/:_id',Controller.EditBanner)
+  router.get('/ViewDetails/:_id',Controller.OrderDetails)
 
   
   
@@ -40,12 +43,20 @@ const ProductController = require('../controllers/product_controller')
   router.post('/hide_product',admin_auth,ProductController.HideProduct)
   router.post('/show_product',admin_auth,ProductController.ShowProduct)
   router.post('/edit_product/:_id',admin_auth,ProductController.edit_product)
-  router.post('/update_product/:_id',admin_auth,upload.single('Image'),ProductController.update_product)
+  router.post('/update_product/:_id',admin_auth,upload.array('Image',4),ProductController.update_product)
   router.post('/add_category',ProductController.addCategory)  
   router.post('/delete_category',ProductController.DeleteCategory)
   router.post('/Change_status',admin_auth,Controller.ChangeOrderStatus)
   router.post('/coupon',admin_auth,Controller.CreateCoupon)
   router.post('/DeleteCoupon',Controller.DeleteCoupon)
+  router.post('/add_banner',upload.single('Image'),Controller.UploadBanner)
+  router.post('/edit_banner/:_id',upload.single('Image'),Controller.EditBannerInsert)
+  router.post('/HideBanner',Controller.HideBanner)
+  router.post('/UnHideBanner',Controller.UnHideBanner)
+  router.post('/DeleteBanner',Controller.DeleteBanner)
+  router.post('/GetPaymentDetails',Controller.PaymentDetails)
+
+
 
 
 

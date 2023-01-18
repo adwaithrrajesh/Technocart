@@ -1,75 +1,140 @@
-
-  <body>
-    <%- include('../layouts/layout') -%>
+<body>
+  <%- include('../layouts/layout') -%>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <%- include('../partials/sidebar') -%>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:../../partials/_navbar.html -->
-      <%- include('../partials/navbar') -%>
         <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Banner Management </h3>
-            </div>
-            <div class="row">
-              <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Banner Management</h4>
-                    </p>
-                    <div class="table-responsive">
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:../../partials/_navbar.html -->
+          <%- include('../partials/navbar') -%>
+            <!-- partial -->
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                  <h3 class="page-title"> Banner Management </h3>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Banner Management</h4>
+                        </p>
+                        <div class="table-responsive">
 
-                      <table class="table table-dark" id="Refresh">
-                        <thead>
-                          <tr>
-                            <th> Image </th>
-                            <th></th>
-                            <th>Type</th>
-                            <th></th>
-                            <th>Edit</th>
-                            <th>Hide</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <!-- User view -->
-                          <form action="/admin/bannerImage" method="post" enctype="multipart/form-data">
-                            <tr>
-                              <td><img src="/" alt="" style="width: 100px; height: 100px;"/></td>
-                              <td></td>
-                              <td>Main</td>
-                              <td></td>
-                               <td style="width: 200px;"><input type="file"></td>
-                               <td><button type="submit" class="btn btn-primary">Change</button></td>
-                            </tr>
-                            <tr>
-                              <td><img src="/" alt="" style="width: 100px; height: 100px;"/></td>
-                              <td></td>
-                              <td>Main</td>
-                              <td></td>
-                               <td style="width: 200px;"><input type="file"></td>
-                               <td><button type="submit" class="btn btn-primary">Change</button></td>
-                            </tr>
-                            <tr>
-                              <td><img src="/" alt="" style="width: 100px; height: 100px;"/></td>
-                              <td></td>
-                              <td>Main</td>
-                              <td></td>
-                               <td style="width: 200px;"><input type="file"></td>
-                               <td><button type="submit" class="btn btn-primary">Change</button></td>
-                            </tr>
-                          </form>
-                        </tbody>
-                      </table>
+                          <a href="/admin/add-banner" style="margin-left: 90%; text-decoration: none;">Add
+                            bannerImage</a>
+                          <table class="table table-dark" id="Refresh">
+                            <thead>
+                              <tr>
+                                <th> Image </th>
+                                <th></th>
+                                <th>Banner Name</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th></th>
+                                <th>Edit</th>
+                                <th>Hide</th>
+                                <th>Delete</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- User view -->
+                              <% banner.forEach(function(view) { %>
+                                <tr>
+                                  <td><img src="/images/products/<%=view.BannerImage%>" alt="Banner"
+                                      style="width: 100px; height: 100px;" /></td>
+                                  <td></td>
+                                  <td>
+                                    <%=view.BannerName%>
+                                  </td>
+                                  <td></td>
+                                  <% if (view.Hide) { %>
+                                    <td>Hidden</td>
+                                    <%} else { %>
+                                      <td>Active</td>
+                                      <% } %>
+                                        <td></td>
+                                        <td><a href="/admin/EditBanner/<%=view._id%>"><button class="btn btn-primary"><i
+                                                class="mdi mdi-auto-fix"></i></button></a></td>
+                                        <% if (view.Hide) { %>
+                                          <td><button onclick="UnHideBanner('<%=view._id%>')" class="btn btn-danger"><i
+                                                class="mdi mdi-check"></i></button></td>
+                                          <%} else { %>
+                                            <td><button onclick="HideBanner('<%=view._id%>')" class="btn btn-success"><i
+                                                  class="mdi mdi-close"></i></button></td>
+                                            <% } %>
+                                              <td><button onclick="DeleteBanner('<%=view._id%>')"
+                                                  class="btn btn-danger"><i class="mdi mdi-delete"></i></button></td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </body>
+</body>
+
+<script>
+  function HideBanner(BannerId) {
+    $.ajax({
+      url: '/admin/HideBanner',
+      data: {
+        BannerId
+      },
+      method: 'post',
+      success: (response) => {
+        location.reload()
+      }
+    })
+  }
+
+  function UnHideBanner(BannerId) {
+    $.ajax({
+      url: '/admin/UnHideBanner',
+      data: {
+        BannerId
+      },
+      method: 'post',
+      success: (response) => {
+        location.reload()
+      }
+    })
+  }
+
+  function DeleteBanner(BannerId) {
+    Swal.fire({
+      title: 'Delete Banner',
+      text: "Are you sure Want to Delete thi Banner",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted',
+          'Banner Deleted Successfully',
+          'success'
+        ).then(() => {
+          $.ajax({
+            url: '/admin/DeleteBanner',
+            data: {
+              BannerId
+            },
+            method: 'post',
+            success: (response) => {
+              location.reload()
+            }
+          })
+        })
+      }
+    })
+  }
+</script>

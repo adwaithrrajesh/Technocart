@@ -24,6 +24,9 @@
     "objectid": "^2.3.0",
     "razorpay": "^2.8.4",
     "sweetalert2": "^11.7.0",
-    "twilio": "^2.5.2"
+    "twilio": "^3.84.1"
+  },
+  "devDependencies": {
+    "@types/twilio": "^3.19.3"
   }
 }

@@ -14,7 +14,6 @@ module.exports={
   // Insert Product
     InsertProduct:(req,res)=>{
       let trend = req.body.Trending
-      console.log(trend)
         let product = {
           ProductName:req.body.ProductName,
           Image:req.files,

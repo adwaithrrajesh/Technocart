@@ -46,15 +46,15 @@
                               <!-- <td></td> -->
                               <td>
                                 <form action="/admin/edit_product/<%=product._id%>" method="post">
-                                <button type="submit" class="btn btn-primary">Edit</button>
+                                <button type="submit" class="btn btn-primary"><i class="mdi mdi-pencil"></i></button>
                                 </form>
                               </td> 
                               <td></td>
                               <td>
                                 <% if(product.Allow){ %>
-                                    <button type="submit" onclick="Hide('<%=product._id%>')" class="btn btn-dark">Hide</button>
+                                    <button class="btn btn-success" onclick="Hide('<%=product._id%>')"><i class="mdi mdi-close"></i></button>
                                 <% } else{ %>  
-                                  <button type="submit" onclick="Show('<%=product._id%>')" class="btn btn-success">Show</button>
+                                  <button class="btn btn-danger" onclick="Show('<%=product._id%>')"><i class="mdi mdi-checkbox-marked-circle"></i></button>
                                <% } %>
                             </td>
                             </tr>

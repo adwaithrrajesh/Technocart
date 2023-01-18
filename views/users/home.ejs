@@ -137,27 +137,17 @@
     <div class="ltn__banner-area mt-120---">
         <div class="container">
             <div class="row ltn__custom-gutter--- justify-content-center">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ltn__banner-item">
-                        <div class="ltn__banner-img">
-                            <a href="/shop"><img src="img/banner/1.jpg" alt="Banner Image"></a>
+                <% Banner.forEach(function(view) { %>
+                    <% if(!view.Hide){ %>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="ltn__banner-item">
+                                <div class="ltn__banner-img">
+                                    <a href="/shop"><img src="/images/products/<%=view.BannerImage%>" alt="Banner Image"></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ltn__banner-item">
-                        <div class="ltn__banner-img">
-                            <a href="/shop"><img src="img/banner/2.jpg" alt="Banner Image"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="ltn__banner-item">
-                        <div class="ltn__banner-img">
-                            <a href="/shop"><img src="img/banner/3.jpg" alt="Banner Image"></a>
-                        </div>
-                    </div>
-                </div>
+                     <% } %>
+                <% }); %>
             </div>
         </div>
     </div>

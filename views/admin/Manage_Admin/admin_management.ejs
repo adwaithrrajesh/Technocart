@@ -1,98 +1,138 @@
-
-  <body>
-    <%- include('../layouts/layout') -%>
+<body>
+  <%- include('../layouts/layout') -%>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <%- include('../partials/sidebar') -%>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:../../partials/_navbar.html -->
-      <%- include('../partials/navbar') -%>
         <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Basic Tables </h3>
-            </div>
-            <div class="row">
-              <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Inverse table</h4>
-                    </p>
-                    <div class="table-responsive">
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:../../partials/_navbar.html -->
+          <%- include('../partials/navbar') -%>
+            <!-- partial -->
+            <div class="main-panel">
+              <div class="content-wrapper">
+                <div class="page-header">
+                  <h3 class="page-title"> Basic Tables </h3>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Inverse table</h4>
+                        </p>
+                        <div class="table-responsive">
 
-                      <table class="table table-dark" id="Refresh">
-                        <thead>
-                          <tr>
-                            <th> Name </th>
-                            <th></th>
-                            <th>Email</th>
-                            <th> Status </th>
-                            <th> Action </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <!-- User view -->
-                          <% admin_details.forEach(function(admin) { %>
-                            <tr>
-                              <td><%- admin.FirstName -%></td>
-                              <td></td>
-                              <td><%= admin.Email %></td>
-                              <% if(admin.Allow){ %>
-                                <td>Active</td>
-                              <% } else{ %>  
-                                <td>InActive</td>
-                             <% } %>
-                             <% if(admin.Allow){ %>
-                              <td>
-                                  <button type="submit" onclick="Block('<%=admin._id%>')" class="btn btn-danger">Block</a>
-                            </td>
-                            <% } else{ %>  
-                               <td>  
-                                  <button type="submit" class="btn btn-success" onclick="Allow('<%=admin._id%>')">Allow</button> 
-                             </td>
-                           <% } %>
-                            </tr>
-                         <% }); %> 
+                          <table class="table table-dark" id="Refresh">
+                            <thead>
+                              <tr>
+                                <th> Name </th>
+                                <th></th>
+                                <th>Email</th>
+                                <th> Status </th>
+                                <th> Action </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- User view -->
+                              <% admin_details.forEach(function(admin) { %>
+                                <tr>
+                                  <td><%- admin.FirstName -%></td>
+                                  <td></td>
+                                  <td>
+                                    <%= admin.Email %>
+                                  </td>
+                                  <% if(admin.Allow){ %>
+                                    <td>Active</td>
+                                    <% } else{ %>
+                                      <td>InActive</td>
+                                      <% } %>
+                                        <% if(admin.Allow){ %>
+                                          <td>
+                                            <button type="submit" onclick="Block('<%=admin._id%>')"
+                                              class="btn btn-danger"><i class="mdi mdi-close-circle-outline"></i></a>
+                                          </td>
+                                          <% } else{ %>
+                                            <td>
+                                              <button type="submit" class="btn btn-success"
+                                                onclick="Allow('<%=admin._id%>')"><i class="mdi mdi-check"></i></button>
+                                            </td>
+                                            <% } %>
+                                </tr>
+                                <% }); %>
 
-                        </tbody>
-                      </table>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </body>
+</body>
 
-  <script>
-    function Block(admin) {
-        $.ajax({
-          url: "/admin/block_admin",
-          data: {
-            admin
-          },
-          method: "post",
-          success: (response) => {
-            console.log(response)
-              $('#Refresh').load(location.href+" #Refresh>*","")
-          },
-        });
+<script>
+  function Block(admin) {
+    Swal.fire({
+      title: 'Block Admin',
+      text: "Do you want to Block this Admin",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Block'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Blocked',
+          'Admin Blocked Successfully',
+          'success'
+        ).then(() => {
+          $.ajax({
+            url: "/admin/block_admin",
+            data: {
+              admin
+            },
+            method: "post",
+            success: (response) => {
+              console.log(response)
+              $('#Refresh').load(location.href + " #Refresh>*", "")
+            },
+          });
+        })
       }
-      function Allow(admin) {
-        $.ajax({
-          url: "/admin/allow_admin",
-          data: {
-            admin
-          },
-          method: "post",
-          success: (response) => {
-              $('#Refresh').load(location.href+" #Refresh>*","")
-          },
-        });
+    })
+  }
+
+  function Allow(admin) {
+    Swal.fire({
+      title: 'Allow Admin',
+      text: "Do you want to Add this Admin ",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Allow Admin'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Added',
+          'Admin Added Successfully',
+          'success'
+        ).then(() => {
+          $.ajax({
+            url: "/admin/allow_admin",
+            data: {
+              admin
+            },
+            method: "post",
+            success: (response) => {
+              $('#Refresh').load(location.href + " #Refresh>*", "")
+            },
+          });
+        })
       }
-  </script>
+    })
+  }
+</script>

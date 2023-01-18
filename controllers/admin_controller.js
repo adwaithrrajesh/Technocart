@@ -14,6 +14,8 @@ const expressFlash = require('express-flash')
 const user_model = require('../model/User_model')
 const coupon_model = require('../model/coupon')
 const order_model = require('../model/order_model')
+const banner_model = require('../model/banner_management')
+const address_model = require('../model/address_model')
 
 
 module.exports = {
@@ -67,7 +69,9 @@ module.exports = {
         let TotalProducts = await product_model.find({Allow:true}).countDocuments()
         let HiddenProducts = await product_model.find({Allow:false}).countDocuments()
         let TotalDelivery = await order_model.find({OrderStatus:'Delivered'}).countDocuments()
-        res.render('admin/admin_home',{Orders,Activeusers,Blockedusers,TotalProducts,HiddenProducts,TotalDelivery})
+        adminHelper.AllowedAdmins().then((Admins)=>{
+        res.render('admin/admin_home',{Orders,Activeusers,Blockedusers,TotalProducts,HiddenProducts,TotalDelivery,Admins})
+        })
       })
       },
 
@@ -139,12 +143,6 @@ module.exports = {
         res.json(true)
       })
     },
-    Banner:(req,res)=>{
-      res.render('admin/BannerManagement/Banner_Management')
-    },
-    BannerUpload:(req,res)=>{
-      console.log(req.file)
-    },
     CouponManagement: async(req,res)=>{
       let Coupon = await coupon_model.find()
       res.render('admin/ManageCoupon/Coupon_Management',{Coupon})
@@ -163,5 +161,62 @@ module.exports = {
       adminHelper.DeleteCoupon(CouponId).then(()=>{
         res.json(true)
       })
+    },
+    Banner:async(req,res)=>{
+      let banner = await banner_model.find()
+      res.render('admin/BannerManagement/Banner_Management',{banner})
+    },
+    Addbanner: async(req,res)=>{
+      res.render('admin/BannerManagement/AddBanner')
+    },
+    UploadBanner:(req,res)=>{
+      let Image = req.file.filename
+      let BannerName = req.body.BannerName
+      adminHelper.UploadBanner(BannerName,Image).then(()=>{
+        res.redirect('/admin/Banner_Management')
+      })
+    },
+    EditBanner:(req,res)=>{
+      let BannerId = req.params._id
+      adminHelper.EditBanner(BannerId).then((banner)=>{
+        res.render('admin/BannerManagement/EditBanner',{banner})
+      })
+    },
+    EditBannerInsert:(req,res)=>{
+     let BannerName = req.body.BannerName
+     let Image = req.file.filename
+     let Id = req.params._id
+     adminHelper.EditBannerInsert(Id,BannerName,Image).then(()=>{
+      res.redirect('/admin/Banner_Management')
+     })
+    },
+    HideBanner:(req,res)=>{
+      let BannerId = req.body.BannerId
+      adminHelper.HideBanner(BannerId).then(()=>{
+        res.json(true)
+      })
+    },
+    UnHideBanner:(req,res)=>{
+      let BannerId = req.body.BannerId
+      adminHelper.UnHideBanner(BannerId).then(()=>{
+        res.json(true)
+      })
+    },
+    DeleteBanner:(req,res)=>{
+      let BannerId = req.body.BannerId
+      adminHelper.DeleteBanner(BannerId).then(()=>{
+        res.json(true)
+      })
+    },
+    OrderDetails:async(req,res)=>{
+      let OrderId = req.params._id
+      adminHelper.OrderDetails(OrderId).then(async({Products,User})=>{
+        res.render('admin/OrderManagement/Order_details',{Products,User})
+      })
+    },
+    PaymentDetails: async(req,res)=>{
+      let OnlinePayment = await order_model.find({PaymentMethod:'Online Payment'}).countDocuments()
+      let CashOnDelivery = await order_model.find({PaymentMethod:'Cash on Delivery'}).countDocuments()
+      res.json({OnlinePayment,CashOnDelivery})
     }
 }

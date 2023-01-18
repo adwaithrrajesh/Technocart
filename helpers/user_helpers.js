@@ -12,7 +12,7 @@ const wishlist_model = require("../model/wishlist");
 const address_model = require("../model/address_model");
 const { default: mongoose } = require("mongoose");
 const Order_model = require("../model/order_model");
-const Coupon_model = require("../model/coupon")
+const Coupon_model = require("../model/coupon");
 // Razorpay
 const Razorpay = require("razorpay");
 var instance = new Razorpay({
@@ -67,8 +67,8 @@ module.exports = {
       await user_model.findOneAndUpdate(
         { _id: objectid(userData) },
         { $set: { block: true } }
-      )
-      res(true)
+      );
+      res(true);
     });
   },
   // User unblock
@@ -77,8 +77,8 @@ module.exports = {
       await user_model.findOneAndUpdate(
         { _id: objectid(userData) },
         { $set: { block: false } }
-      )
-      res(true)
+      );
+      res(true);
     });
   },
   // Data insert
@@ -110,6 +110,7 @@ module.exports = {
       resolve(products_view);
     });
   },
+  // Product view 
   product_view: (page) => {
     return new Promise(async (res) => {
       let page_num = page;
@@ -125,6 +126,7 @@ module.exports = {
       res({ products_view, pagination_count });
     });
   },
+  // Search
   Search: (searchkey) => {
     return new Promise(async (res, rej) => {
       let products_view = await product_model.find({
@@ -133,6 +135,7 @@ module.exports = {
       res(products_view);
     });
   },
+  // Product Details
   ProductDetails: (product_detail) => {
     return new Promise(async (res) => {
       let product = product_detail;
@@ -156,7 +159,7 @@ module.exports = {
               $inc: {
                 "Products.$.Quantity": 1,
                 "Products.$.Subtotal": SubPrice,
-                Total: Product.DiscountPrice
+                Total: Product.DiscountPrice,
               },
             }
           );
@@ -168,9 +171,9 @@ module.exports = {
               $push: {
                 Products: [{ Product: Product_id, Subtotal: SubPrice }],
               },
-              $inc:{
-                Total: SubPrice
-              }
+              $inc: {
+                Total: SubPrice,
+              },
             }
           );
         }
@@ -179,8 +182,8 @@ module.exports = {
         cart = {
           UserId: user_id,
           Products: [{ Product: Product_id, Subtotal: SubPrice }],
-          CouponDiscount:0,
-          Total: Product.DiscountPrice
+          CouponDiscount: 0,
+          Total: Product.DiscountPrice,
         };
         await cart_model.create(cart);
         res();
@@ -192,7 +195,7 @@ module.exports = {
       let cart_products = await cart_model
         .findOne({ UserId: User_id })
         .populate("Products.Product");
-         res(cart_products);
+      res(cart_products);
     });
   },
   ChangeQuantity: ({ CartId, ProductId, Count }, userId) => {
@@ -214,7 +217,7 @@ module.exports = {
                 Product: ProductId,
               },
             },
-            $inc: { Total: Price * -1 }
+            $inc: { Total: Price * -1 },
           }
         );
         resolve({ removeProduct: response });
@@ -225,7 +228,7 @@ module.exports = {
           $inc: {
             "Products.$.Quantity": Count,
             "Products.$.Subtotal": Price * Count,
-            Total: Product.DiscountPrice * Count
+            Total: Product.DiscountPrice * Count,
           },
         }
       );
@@ -236,13 +239,13 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       let Product = await product_model.findOne({ _id: ProductId });
       let Price = Product.DiscountPrice;
-      let cart = await cart_model.findOne({UserId:userId})
-      let CouponDiscount = cart.CouponDiscount
+      let cart = await cart_model.findOne({ UserId: userId });
+      let CouponDiscount = cart.CouponDiscount;
       await cart_model.updateOne(
         { UserId: userId },
         {
           $pull: { Products: { Product: ProductId } },
-          $inc: { Total: Price * -Quantity}
+          $inc: { Total: Price * -Quantity },
         }
       );
       resolve(response);
@@ -399,11 +402,14 @@ module.exports = {
   OrderStore: (Address_Id, Payment_Method, User_Id) => {
     return new Promise(async (resolve, reject) => {
       let cart = await cart_model.findOne({ UserId: User_Id });
-      let user = await user_model.updateOne({_id:User_Id},{
-        $set:{
-          CouponInUse:false
+      let user = await user_model.updateOne(
+        { _id: User_Id },
+        {
+          $set: {
+            CouponInUse: false,
+          },
         }
-      })
+      );
       let Product_Array = cart.Products;
       let TotalPrice = cart.Total;
       let Order = {
@@ -411,7 +417,7 @@ module.exports = {
         Address: Address_Id,
         Products: Product_Array,
         PaymentMethod: "Cash on Delivery",
-        OrderStatus:"Order Confirmed",
+        OrderStatus: "Order Confirmed",
         Total: TotalPrice,
       };
       await Order_model.create(Order);
@@ -420,8 +426,8 @@ module.exports = {
   },
   ViewOrder: (User_Id) => {
     return new Promise(async (resolve, reject) => {
-     let orders = await Order_model.find({UserId:User_Id})
-     resolve(orders)
+      let orders = await Order_model.find({ UserId: User_Id });
+      resolve(orders);
     });
   },
   GenerateRazorpay: (User_Id) => {
@@ -433,7 +439,7 @@ module.exports = {
         amount: Total * 100,
         currency: "INR",
         receipt: "" + Id,
-      }
+      };
       instance.orders.create(options, function (err, order) {
         if (err) {
           console.log(err);
@@ -462,95 +468,114 @@ module.exports = {
   },
   StoreOnlineOrder: (UserId, Address) => {
     return new Promise(async (resolve, reject) => {
-      let cart = await cart_model.findOne({ UserId: UserId });  
+      let cart = await cart_model.findOne({ UserId: UserId });
       let Product_Array = cart.Products;
+      let date = Date()
       let TotalPrice = cart.Total;
       let Order = {
         UserId: UserId,
         Address: Address,
         Products: Product_Array,
         PaymentMethod: "Online Payment",
-        OrderStatus:"Order Confirmed",
+        OrderStatus: "Order Confirmed",
         Total: TotalPrice,
+        Date: date
       };
       await Order_model.create(Order);
       resolve(response);
     });
   },
-  TrackOrder:(OrderId)=>{
-    return new Promise(async(resolve,reject)=>{
-      let Order = await Order_model.findOne({_id:OrderId})
-      resolve(Order)
-    })
+  TrackOrder: (OrderId) => {
+    return new Promise(async (resolve, reject) => {
+      let Order = await Order_model.findOne({ _id: OrderId });
+      resolve(Order);
+    });
   },
-  CancelOrder:(OrderId)=>{
-    return new Promise(async(resolve,reject)=>{
-       await Order_model.updateOne({_id:OrderId},{
-          $set:{
-            OrderStatus: 'Order Cancelled'
-        }
-      })
-      resolve()
-    })
-  },
-  CouponManagement:(Code,User)=>{
-    return new Promise(async(resolve,reject)=>{
-      let coupon = await Coupon_model.findOne({CouponCode:Code})
-      let CouponCode = coupon.CouponCode
-      let LimitAmount = coupon.LimitAmount
-      let cart = await cart_model.findOne({UserId:User})
-      let Total = cart.Total
-      let percentage = coupon.Percentage
-      if(LimitAmount<=Total){
-        await cart_model.updateOne({UserId : User},{
-          $set:{
-            CouponDiscount:LimitAmount,
-            Total: parseInt(Total - LimitAmount)
-          }
-         })
-      }else{
-        await cart_model.updateOne({UserId : User},{
-          $set:{
-            Total: parseInt(Total - (Total*percentage)/100),
-            CouponDiscount: parseInt((Total*percentage)/100)
-          }
-         })
-      }
-        await user_model.updateOne({_id:(User)},{
-          $set:{
-            CouponInUse : true
+  CancelOrder: (OrderId) => {
+    return new Promise(async (resolve, reject) => {
+      await Order_model.updateOne(
+        { _id: OrderId },
+        {
+          $set: {
+            OrderStatus: "Order Cancelled",
           },
-          $push:{
-            UsedCoupons:[CouponCode]
-          }
-        })
-        resolve(Code)
-    })
-  },
-  Filter:(min,max)=>{
-    return new Promise(async(resolve,reject)=>{
-      let products_view = await product_model.find({ $and: [{ DiscountPrice: { $lte: max, $gte: min } }] })
-      resolve(products_view)
-    })
-  },
-  RemoveCoupon:(Code,User)=>{
-    return new Promise(async(resolve,reject)=>{
-      let coupon = await Coupon_model.findOne({CouponCode:Code})
-      let cart = await cart_model.findOne({UserId:User})
-      let Total = cart.Total
-      let percentage = coupon.Percentage
-      let value = Total/(100-percentage)
-      let user = await user_model.updateOne({_id:User},{
-        $pull:{UsedCoupons:Code},
-        $set:{CouponInUse:false}
-      })
-      await cart_model.updateOne({UserId : User},{
-        $set:{
-          Total: parseInt(value*100),
-          CouponDiscount: 0
         }
-       })
-      resolve(true)
-    })
-  }
+      );
+      resolve();
+    });
+  },
+  CouponManagement: (Code, User) => {
+    return new Promise(async (resolve, reject) => {
+      let coupon = await Coupon_model.findOne({ CouponCode: Code });
+      let CouponCode = coupon.CouponCode;
+      let LimitAmount = coupon.LimitAmount;
+      let cart = await cart_model.findOne({ UserId: User });
+      let Total = cart.Total;
+      let percentage = coupon.Percentage;
+        await cart_model.updateOne({ UserId: User },
+          {
+            $set: {
+              CouponDiscount: ((Total * percentage) / 100),
+              Total: parseInt(Total - (Total * percentage) / 100),
+            },
+          })
+        let Cart = await cart_model.findOne({UserId:User})
+        let CartDiscount = Cart.CouponDiscount
+        if (LimitAmount <= CartDiscount) {
+          await cart_model.updateOne(
+            { UserId: User },
+            {
+              $set: {
+                CouponDiscount: LimitAmount,
+                Total: parseInt(Total - LimitAmount),
+              },
+            }
+          );
+        }
+      await user_model.updateOne(
+        { _id: User },
+        {
+          $set: {
+            CouponInUse: true,
+          },
+          $push: {
+            UsedCoupons: [CouponCode],
+          },
+        }
+      );
+      resolve(Code);
+    });
+  },
+  Filter: (min, max) => {
+    return new Promise(async (resolve, reject) => {
+      let products_view = await product_model.find({
+        $and: [{ DiscountPrice: { $lte: max, $gte: min } }],
+      });
+      resolve(products_view);
+    });
+  },
+  RemoveCoupon: (Code, User) => {
+    return new Promise(async (resolve, reject) => {
+      let cart = await cart_model.findOne({ UserId: User });
+      let Total = cart.Total
+      let CartDiscount = cart.CouponDiscount
+      await user_model.updateOne(
+        { _id: User },
+        {
+          $pull: { UsedCoupons: Code },
+          $set: { CouponInUse: false },
+        }
+      );
+      await cart_model.updateOne(
+        { UserId: User },
+        {
+          $set: {
+            Total: parseInt(Total + CartDiscount),
+            CouponDiscount: 0,
+          },
+        }
+      );
+      resolve(true);
+    });
+  },
 };

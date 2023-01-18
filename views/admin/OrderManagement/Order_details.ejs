@@ -1,0 +1,101 @@
+<body>
+    <%- include('../layouts/layout') -%>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <%- include('../partials/sidebar') -%>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_navbar.html -->
+      <%- include('../partials/navbar') -%>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Order Management </h3>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <div class="row ">
+                        <div class="col-12 grid-margin">
+                          <div class="card">
+                            <div class="card-body">
+                              <h4 class="card-title">User Details</h4>
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th> FirstName </th>
+                                      <th> Email </th>
+                                      <th> Contact Number </th>
+                                      <th> Address </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody >
+                                    <td><%=User.Firstname%></td>
+                                    <td><%=User.Email%></td>
+                                    <td>+91 <%=User.PhoneNumber%></td>
+                                    <td></td>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title"></h4>
+                      <div class="row ">
+                          <div class="col-12 grid-margin">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title">Product Details</h4>
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th> Product Image </th>
+                                        <th> Product Name </th>
+                                        <th> Price </th>
+                                        <th>Quantity</th>
+                                        <th>Subtotal</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody >
+                                    <% Products.forEach(function(x) { %>
+                                      <tr>
+                                      <td><img src="/images/products/<%=x.Product.Image[0].filename%>" alt="Banner"
+                                        style="width: 100px; height: 100px;"/></td>
+                                      <td><%=x.Product.ProductName%></td>
+                                      <td>₹<%=x.Product.DiscountPrice%></td>
+                                      <td><%=x.Quantity%></td>
+                                      <td>₹<%=x.Subtotal%></td>
+                                    </tr>
+                                    <% }); %>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>    
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>

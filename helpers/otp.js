@@ -13,8 +13,6 @@ module.exports={
     },      
     verify:(Phone,code)=>{
         return new Promise ((resolve,reject)=>{
-            // return new Promise((res,rej)=>{
-                console.log(Phone,code);
                 const client = require('twilio')(accountSid, authToken);
           client.verify.v2.services(serviceId)
           .verificationChecks
@@ -26,7 +24,6 @@ module.exports={
                 resolve(false)
               }
         })
-            // })
         })
        
     }

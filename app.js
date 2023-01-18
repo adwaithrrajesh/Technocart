@@ -10,11 +10,11 @@ const flash = require('express-flash')
 
 
 
-var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/admin');
+const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
 
 
-var app = express();
+const app = express();
 
 
 // Database setup 

@@ -7,7 +7,9 @@ const { response } = require('express')
 const objectid = require('mongoose').Types.ObjectId
 const order_model = require('../model/order_model')
 const coupon_model = require('../model/coupon')
-
+const BannerModel = require('../model/banner_management')
+const product_model = require('../model/product_model')
+const address_model = require('../model/address_model')
 
 
 module.exports={
@@ -43,9 +45,7 @@ module.exports={
             }
         })
     },
-
     // Register 
-
     adminRegister:(adminData)=>{
         return new Promise(async(res,rej)=>{
             let admin_check = await admin_reg_model.findOne({Email:adminData.Email})
@@ -171,6 +171,82 @@ module.exports={
         return new Promise(async(resolve,reject)=>{
         await coupon_model.deleteOne({_id:CouponId})
         resolve()
+        })
+    },
+    UploadBanner:(Name,Image)=>{
+        return new Promise(async(resolve,reject)=>{
+            let Banner = {
+                BannerName:Name,
+                BannerImage:Image
+            }
+            await BannerModel.create(Banner)
+            resolve(true)
+        })
+    },
+    EditBanner:(BannerId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let banner = await BannerModel.findOne({_id:BannerId})
+            resolve(banner)
+        })
+    },
+    EditBannerInsert:(BannerId,Name,Image)=>{
+        return new Promise(async(resolve,reject)=>{
+            await BannerModel.updateOne({_id:BannerId},{
+                $set:{
+                    BannerName:Name,
+                    BannerImage:Image
+                }
+            })
+            resolve(true)
+        })
+    },
+    HideBanner:(BannerId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await BannerModel.updateOne({_id:BannerId},{
+                $set:{
+                    Hide:true
+                }
+            })
+            resolve(true)
+        })
+    },
+    UnHideBanner:(BannerId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await BannerModel.updateOne({_id:BannerId},{
+                $set:{
+                    Hide:false
+                }
+            })
+            resolve(true)
+        })
+    },
+    DeleteBanner:(BannerId)=>{
+        return new Promise(async(resolve,reject)=>{
+            await BannerModel.deleteOne({_id:BannerId})
+            resolve()
+        })
+    },
+    OrderDetails:(OrderID)=>{
+        return new Promise(async(resolve,reject)=>{
+            // Order
+            let Order = await order_model.findOne({_id:OrderID})
+            // Finding Products 
+            let productFind = await order_model.findOne({_id:OrderID}).populate('Products.Product')
+            let Products = productFind.Products
+            // Finding User
+            let User = await user_model.findOne({_id:Order.UserId})
+            // Find Address
+            let value = Order.Address
+            console.log(value,"Original Address Value")
+            let Check = await address_model.findOne({})  
+            console.log(Check,"Finded")
+            resolve({Products,User})
+        })
+    },
+    AllowedAdmins:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let Admins = await admin_reg_model.find({Allow:true}).limit(5)
+            resolve(Admins)
         })
     }
 

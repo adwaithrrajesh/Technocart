@@ -22,6 +22,7 @@ const flash = require("express-flash");
 const order_model = require("../model/order_model");
 const coupon_model = require("../model/coupon");
 var moment = require("moment");
+let banner_model = require('../model/banner_management')
 
 module.exports = {
   // Signup
@@ -74,13 +75,15 @@ module.exports = {
     let login = req.session.loggedIn;
     let user = req.session.user;
     let products = await product_model.find();
+    let Banner = await banner_model.find()
+    console.log(Banner)
     if (login) {
       let cart = await cart_model
         .findOne({ UserId: req.session.user._id })
         .populate("Products.Product");
-      res.render("users/home", { user, cart, products });
+      res.render("users/home", { user, cart, products, Banner });
     } else {
-      res.render("users/home", { user: false, products });
+      res.render("users/home", { user: false, products, Banner });
     }
   },
   // Shop
@@ -393,9 +396,6 @@ module.exports = {
     let User = req.session.user._id;
     let cart = await cart_model.findOne({ UserId: User });
     let coupon = await coupon_model.findOne({ CouponCode: Code });
-    if (new Date(coupon.ExpiryDate) > new Date(date)) {
-      console.log("Expired");
-    } else {
       if (!coupon) {
         res.json({ Invalid: true });
       } else {
@@ -420,7 +420,6 @@ module.exports = {
           }
         }
       }
-    }
   },
   CouponView: async (req, res) => {
     let user = req.session.user;
@@ -451,4 +450,7 @@ module.exports = {
       res.json(true);
     });
   },
+  DownloadReport: (req,res)=>{
+    console.log(req.body)
+  }
 };

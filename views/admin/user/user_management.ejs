@@ -46,12 +46,12 @@
                              <% } %>
                              <% if(user.block){ %>
                               <td>
-                                  <button type="submit" onclick="Unblock('<%=user._id%>')" class="btn btn-success">Unblock</a>
+                                  <button type="submit" onclick="Unblock('<%=user._id%>')" class="btn btn-danger"><i class="mdi mdi-check"></i></a>
                             </td>
                             <% } else{ %>  
                               <td>  
-                                <button type="submit" onclick="Block('<%=user._id%>')" class="btn btn-danger">block</a>
-                            </td>
+                                <button type="submit" onclick="Block('<%=user._id%>')" class="btn btn-success"><i class="mdi mdi-close-circle-outline"></i></button>
+                              </td>
                            <% } %>
                             </tr>
                          <% }); %> 

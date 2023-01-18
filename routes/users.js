@@ -59,7 +59,7 @@ router.post('/cancel_order',Controller.CancelOrder)
 router.post('/couponcode',Controller.CouponCode)
 router.post('/filterprice',Controller.FilterPrice)
 router.post('/removeCoupon',Controller.RemoveCoupon)
-
+router.post('/DownloadSalesReport',Controller.DownloadReport)
  
 
 

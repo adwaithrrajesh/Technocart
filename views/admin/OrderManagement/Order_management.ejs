@@ -20,17 +20,28 @@
                     <h4 class="card-title"></h4>
                     <div class="row ">
                         <div class="col-12 grid-margin">
+
+                          <div style="margin-left: 60%;">
+                          <!-- <form action="/DownloadSalesReport" method="post">
+                         From: <input type="date" name="From" style="background-color: rgb(110, 114, 117);">
+                         To : <input type="date" name="To" style="background-color: rgb(110, 114, 117);"> -->
+                        <!-- </form> -->
+                      </div>
+
                           <div class="card">
                             <div class="card-body">
                               <h4 class="card-title">Order Status</h4>
                               <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="example">
+                         <!-- <button type="submit" id="example" class="btn btn-success">Download<i class="mdi mdi-download"></i></button> -->
                                   <thead>
                                     <tr>
                                       <th> Order ID </th>
                                       <th> Total </th>
                                       <th> Payment Mode </th>
                                       <th> Status </th>
+                                      <th>Order Date</th>
+                                      <th> Order Details </th>
                                       <th> Order Status </th>
                                     </tr>
                                   </thead>
@@ -43,15 +54,34 @@
                                        <td> $<%=view.Total%> </td>
                                        <td> <%=view.PaymentMethod%> </td>
                                        <td> <%=view.OrderStatus%> </td>
-                                       <td>
-                                        <select class="form-select"  id="OrderStatus" onchange="OrderStatus('<%=view._id%>',this.value)"  style="background-color: rgb(47, 47, 57); color: aliceblue; width: 180px;"  aria-label="Default select example" >
-                                          <option selected value="<%=view.OrderStatus%>"><%=view.OrderStatus%></option>
-                                          <option value="Order Processed">Order Processed</option>
-                                          <option value="Shipped">Shipped</option>
-                                          <option value="Out of delivery">Out of Delivery</option>
-                                          <option value="Delivered">Delivered</option>
-                                        </select>                                      
-                                       </td>
+                                       <td><%=view.Date%></td>
+                                       <td><a href="/admin/ViewDetails/<%=view._id%>" style="text-decoration: none;">View Details</a></td>
+
+                                       <% if(view.OrderStatus == 'Order Cancelled'){ %>
+                                        <td>
+                                          <select class="form-select"  id="OrderStatus" onchange="OrderStatus('<%=view._id%>',this.value)"  style="background-color: rgb(47, 47, 57); color: rgb(241, 77, 27); width: 180px;"  aria-label="Default select example" >
+                                            <option selected value="<%=view.OrderStatus%>"><%=view.OrderStatus%></option>
+                                          </select>                                      
+                                         </td>
+                                      <% } else{ %>  
+                                        <% if(view.OrderStatus == 'Delivered'){ %>
+                                          <td>
+                                            <select class="form-select"  id="OrderStatus" onchange="OrderStatus('<%=view._id%>',this.value)"  style="background-color: rgb(47, 47, 57); color: rgb(74, 240, 23); width: 180px;"  aria-label="Default select example" >
+                                              <option selected value="<%=view.OrderStatus%>"><%=view.OrderStatus%></option>
+                                            </select>                                      
+                                           </td>
+                                        <% } else{ %>  
+                                          <td>
+                                            <select class="form-select"  id="OrderStatus" onchange="OrderStatus('<%=view._id%>',this.value)"  style="background-color: rgb(47, 47, 57); color: aliceblue; width: 180px;"  aria-label="Default select example" >
+                                              <option selected value="<%=view.OrderStatus%>"><%=view.OrderStatus%></option>
+                                              <option value="Order Processed">Order Processed</option>
+                                              <option value="Shipped">Shipped</option>
+                                              <option value="Out of delivery">Out of Delivery</option>
+                                              <option value="Delivered">Delivered</option>
+                                            </select>                                      
+                                           </td>
+                                       <% } %>
+                                     <% } %>
                                      </tr>
                                     <% }); %>
                                   </tbody>
@@ -87,3 +117,14 @@
               })
     }
   </script>
+
+<script>
+  $(document).ready(function() {
+  $('#example').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+  } );
+} );
+</script>
