@@ -1,34 +1,12 @@
-
-  <body>
-
+<body>
     <%- include('../layouts/layout') -%>
-
-
-
-
-
-
-
-
-
-
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-
-
       <%- include('../partials/sidebar') -%>
-
-
-    
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
-
-
       <%- include('../partials/navbar') -%>
-
-
-
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -42,8 +20,7 @@
                     <h4 class="card-title">Products</h4>
                     </p>
                     <div class="table-responsive">
-                      <table class="table table-dark">
-                        
+                      <table class="table table-dark" id="Refresh">
                         <thead>
                           <tr>
                             <th> Product Image</th>
@@ -54,12 +31,10 @@
                             <th>Category</th> 
                             <th>Edit</th>
                             <th></th>
-                            <th> Delete </th>
+                            <th> Action </th>
                           </tr>
                         </thead>
                         <tbody>
-
-
                           <% products_view.forEach(function(product) { %>
                             <tr>
                               <td><img src="/images/products/<%=product.Image[0].filename %>" alt="" style="width: 150px; height: 150px;"/></td>
@@ -76,15 +51,14 @@
                               </td> 
                               <td></td>
                               <td>
-                                <form action="/admin/delete_product/<%=product._id%>" method="post">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                              </form>
+                                <% if(product.Allow){ %>
+                                    <button type="submit" onclick="Hide('<%=product._id%>')" class="btn btn-dark">Hide</button>
+                                <% } else{ %>  
+                                  <button type="submit" onclick="Show('<%=product._id%>')" class="btn btn-success">Show</button>
+                               <% } %>
                             </td>
                             </tr>
                          <% }); %> 
-
-
-
                         </tbody>
                       </table>
                     </div>
@@ -97,3 +71,30 @@
       </div>
     </div>
   </body>
+
+  <script>
+    function Hide(Product) {
+        $.ajax({
+          url: "/admin/hide_product",
+          data: {
+            Product
+          },
+          method: "post",
+          success: (response) => {
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          },
+        });
+      }
+      function Show(Product) {
+        $.ajax({
+          url: "/admin/show_product",
+          data: {
+            Product
+          },
+          method: "post",
+          success: (response) => {
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          },
+        });
+      }
+  </script>

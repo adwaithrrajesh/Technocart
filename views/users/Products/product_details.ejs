@@ -1,334 +1,525 @@
-<%- include('../layouts/layout') -%>
-<%- include('../partials/shop_header') -%>
-<%- include('../partials/shop_cart_menu') -%>
-<%- include('../partials/mobile_menu') -%>
-
-  <body>
-
-    <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
-        <div class="container">
+<%- include('../layouts/layout') -%> <%- include('../partials/shop_header') -%>
+    <%- include('../partials/mobile_menu') -%>
+      <body>
+        <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
+          <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <!-- Mobile Menu Button -->
-                    <div class="mobile-menu-toggle d-lg-none">
-                        <span>MENU</span>
-                        <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
-                            <svg viewBox="0 0 800 600">
-                                <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
-                                <path d="M300,320 L540,320" id="middle"></path>
-                                <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
-                            </svg>
-                        </a>
-                    </div>
+              <div class="col-lg-12">
+                <!-- Mobile Menu Button -->
+                <div class="mobile-menu-toggle d-lg-none">
+                  <span>MENU</span>
+                  <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                    <svg viewBox="0 0 800 600">
+                      <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                        id="top"></path>
+                      <path d="M300,320 L540,320" id="middle"></path>
+                      <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                        id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                    </svg>
+                  </a>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <div class = "card-wrapper">
-      <div class = "card">
-        <!-- card left -->
-        <div class = "product-imgs">
-          <div class = "img-display">
-            <div class = "img-showcase">
-              <img src = "/images/products/<%=product_det.Image[0].filename %>" alt = "shoe image">
-              <img src = "/images/products/<%=product_det.Image[1].filename %>" alt = "shoe image">
-              <img src = "/images/products/<%=product_det.Image[2].filename %>" alt = "shoe image">
-              <img src = "/images/products/<%=product_det.Image[3].filename %>" alt = "shoe image">
-            </div>
-          </div>
-           <div class = "img-select">
-            <div class = "img-item">
-                <a href = "#" data-id = "1">
-                  <img src = "/images/products/<%=product_det.Image[0].filename %>" alt = "Image 2">
-                </a>
               </div>
-            <div class = "img-item">
-              <a href = "#" data-id = "2">
-                <img src = "/images/products/<%=product_det.Image[1].filename %>" alt = "Image 2">
-              </a>
-            </div>
-            <div class = "img-item">
-              <a href = "#" data-id = "3">
-                <img src = "/images/products/<%=product_det.Image[2].filename %>" alt = "Image 3">
-              </a>
-            </div>
-            <div class = "img-item">
-              <a href = "#" data-id = "4">
-                <img src = "/images/products/<%=product_det.Image[3].filename %>" alt = "Image 4">
-              </a>
             </div>
           </div>
         </div>
-        <!-- card right -->
-        <div class = "product-content">
-          <h2 class = "product-title"><%=product_det.ProductName%></h2>
-          <div class = "product-rating">
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star"></i>
-            <i class = "fas fa-star-half-alt"></i>
-            <span>4.7(21)</span>
-          </div>
+        <div class="card-wrapper">
+          <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+              <div class="img-display">
+                <div class="img-showcase">
+                  <img src="/images/products/<%=product_det.Image[0].filename %>" alt="shoe image" />
+                  <img src="/images/products/<%=product_det.Image[1].filename %>" alt="shoe image" />
+                  <img src="/images/products/<%=product_det.Image[2].filename %>" alt="shoe image" />
+                  <img src="/images/products/<%=product_det.Image[3].filename %>" alt="shoe image" />
+                </div>
+              </div>
+              <div class="img-select">
+                <div class="img-item">
+                  <a href="#" data-id="1">
+                    <img src="/images/products/<%=product_det.Image[0].filename %>" alt="Image 2" />
+                  </a>
+                </div>
+                <div class="img-item">
+                  <a href="#" data-id="2">
+                    <img src="/images/products/<%=product_det.Image[1].filename %>" alt="Image 2" />
+                  </a>
+                </div>
+                <div class="img-item">
+                  <a href="#" data-id="3">
+                    <img src="/images/products/<%=product_det.Image[2].filename %>" alt="Image 3" />
+                  </a>
+                </div>
+                <div class="img-item">
+                  <a href="#" data-id="4">
+                    <img src="/images/products/<%=product_det.Image[3].filename %>" alt="Image 4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- card right -->
+            <div class="product-content">
+              <h2 class="product-title">
+                <%=product_det.ProductName%>
+              </h2>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>4.7(21)</span>
+              </div>
 
-          <div class = "product-price">
-            <p class = "last-price">Old Price: <span>$<%=product_det.Price%></span></p>
-            <p class = "new-price">New Price: <span>$<%=product_det.DiscountPrice%></span></p>
-          </div>
+              <div class="product-price">
+                <p class="last-price">
+                  Old Price: <span>₹<%=product_det.Price%></span>
+                </p>
+                <p class="new-price">
+                  New Price: <span>₹<%=product_det.DiscountPrice%></span>
+                </p>
+              </div>
 
-          <div class = "product-detail">
-            <h2>about this item: </h2>
-            <p><%=product_det.Discription%></p>
-            <ul>
-              <li>Available: <span>in stock</span></li>
-              <li>Category: <span><%=product_det.Category%></span></li>
-              <li>Shipping Area: <span>All over the world</span></li>
-              <li>Shipping Fee: <span>Free</span></li>
-            </ul>
-          </div>
-
-          <div class = "purchase-info">
-            <a href="/add_to_cart/<%=product_det._id%>" type = "button" class = "btn"> Add to Cart <i class ="fas fa-shopping-cart"></i></a>
-            <button type = "button" class = "btn">
-                Buy Now <i class ="fas fa-shopping-cart"></i>
-              </button>
+              <div class="product-detail">
+                <h2>about this item:</h2>
+                <p>
+                  <%=product_det.Discription%>
+                </p>
+                <ul>
+                  <li>Available: <span>in stock</span></li>
+                  <li>Category: <span>
+                      <%=product_det.Category%>
+                    </span></li>
+                  <li>Shipping Area: <span>All over the world</span></li>
+                  <li>Shipping Fee: <span>Free</span></li>
+                </ul>
+              </div>
+              <% if (user) { %>
+                <div style="margin-left: 100px;">
+                <button class="cart-button" onclick="AddtoCart('<%=product_det._id%>')">
+                  <span class="add-to-cart">Add to cart</span>
+                  <span class="added">Added</span>
+                  <i class="fas fa-shopping-cart"></i>
+                  <i class="fas fa-box"></i>
+                </button>
+              </div>
+                <%} else { %>
+                  <div class="purchase-info">
+                    <a href="/login" type="button" class="btn"> Add to Cart <i class="fas fa-shopping-cart"></i></a>
+                  </div>
+                  <% } %>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          function AddtoCart(Product) {
+            $.ajax({
+              url: "/addCart",
+              data: {
+                ProductId: Product,
+              },
+              method: "post",
+              success: (response) => {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Item Added to cart",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              },
+            });
+          }
+        </script>
 
+        <style>
+          @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
 
+          * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+          }
 
+          body {
+            line-height: 1.5;
+          }
 
+          .card-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+          }
 
+          img {
+            width: 100%;
+            display: block;
+          }
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
+          .img-display {
+            overflow: hidden;
+          }
 
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
+          .img-showcase {
+            display: flex;
+            width: 100%;
+            transition: all 0.5s ease;
+          }
+
+          .img-showcase img {
+            min-width: 100%;
+          }
+
+          .img-select {
+            display: flex;
+          }
+
+          .img-item {
+            margin: 0.3rem;
+          }
+
+          .img-item:nth-child(1),
+          .img-item:nth-child(2),
+          .img-item:nth-child(3) {
+            margin-right: 0;
+          }
+
+          .img-item:hover {
+            opacity: 0.8;
+          }
+
+          .product-content {
+            padding: 2rem 1rem;
+          }
+
+          .product-title {
+            font-size: 3rem;
+            text-transform: capitalize;
+            font-weight: 700;
+            position: relative;
+            color: #12263a;
+            margin: 1rem 0;
+          }
+
+          .product-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 80px;
+            background: #12263a;
+          }
+
+          .product-link {
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            background: #256eff;
+            color: #fff;
+            padding: 0 0.3rem;
+            transition: all 0.5s ease;
+          }
+
+          .product-link:hover {
+            opacity: 0.9;
+          }
+
+          .product-rating {
+            color: #ffc107;
+          }
+
+          .product-rating span {
+            font-weight: 600;
+            color: #252525;
+          }
+
+          .product-price {
+            margin: 1rem 0;
+            font-size: 1rem;
+            font-weight: 700;
+          }
+
+          .product-price span {
+            font-weight: 400;
+          }
+
+          .last-price span {
+            color: #f64749;
+            text-decoration: line-through;
+          }
+
+          .new-price span {
+            color: #256eff;
+          }
+
+          .product-detail h2 {
+            text-transform: capitalize;
+            color: #12263a;
+            padding-bottom: 0.6rem;
+          }
+
+          .product-detail p {
+            font-size: 0.9rem;
+            padding: 0.3rem;
+            opacity: 0.8;
+          }
+
+          .product-detail ul {
+            margin: 1rem 0;
+            font-size: 0.9rem;
+          }
+
+          .product-detail ul li {
+            margin: 0;
+            list-style: none;
+            background: url(shoes_images/checked.png) left center no-repeat;
+            background-size: 18px;
+            padding-left: 1.7rem;
+            margin: 0.4rem 0;
+            font-weight: 600;
+            opacity: 0.9;
+          }
+
+          .product-detail ul li span {
+            font-weight: 400;
+          }
+
+          .purchase-info {
+            margin: 1.5rem 0;
+          }
+
+          .purchase-info input,
+          .purchase-info .btn {
+            border: 1.5px solid #ddd;
+            border-radius: 25px;
+            text-align: center;
+            padding: 0.45rem 0.8rem;
+            outline: 0;
+            margin-right: 0.2rem;
+            margin-bottom: 1rem;
+          }
+
+          .purchase-info input {
+            width: 60px;
+          }
+
+          .purchase-info .btn {
+            cursor: pointer;
+            color: #fff;
+          }
+
+          .purchase-info .btn:first-of-type {
+            background: #256eff;
+          }
+
+          .purchase-info .btn:last-of-type {
+            background: #f64749;
+          }
+
+          .purchase-info .btn:hover {
+            opacity: 0.9;
+          }
+
+          .social-links {
+            display: flex;
+            align-items: center;
+          }
+
+          .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            color: #000;
+            border: 1px solid #000;
+            margin: 0 0.2rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.5s ease;
+          }
+
+          .social-links a:hover {
+            background: #000;
+            border-color: transparent;
+            color: #fff;
+          }
+
+          @media screen and (min-width: 992px) {
+            .card {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              grid-gap: 1.5rem;
+            }
+
+            .card-wrapper {
+              height: 100vh;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .product-imgs {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+
+            .product-content {
+              padding-top: 0;
+            }
+          }
+        </style>
+
+        <script>
+          const imgs = document.querySelectorAll(".img-select a");
+          const imgBtns = [...imgs];
+          let imgId = 1;
+
+          imgBtns.forEach((imgItem) => {
+            imgItem.addEventListener("click", (event) => {
+              event.preventDefault();
+              imgId = imgItem.dataset.id;
+              slideImage();
+            });
+          });
+
+          function slideImage() {
+            const displayWidth = document.querySelector(
+              ".img-showcase img:first-child"
+            ).clientWidth;
+
+            document.querySelector(".img-showcase").style.transform = `translateX(${-(imgId - 1) * displayWidth
+              }px)`;
+          }
+
+          window.addEventListener("resize", slideImage);
+        </script>
+      </body>
+
+      <style>
+.cart-button {
+  position: relative;
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #4834d4;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  transition: .3s ease-in-out;
+  overflow: hidden;
 }
-body{
-    line-height: 1.5;
+.cart-button:hover {
+  background-color: #35269b;
 }
-.card-wrapper{
-    max-width: 1100px;
-    margin: 0 auto;
-}
-img{
-    width: 100%;
-    display: block;
-}
-.img-display{
-    overflow: hidden;
-}
-.img-showcase{
-    display: flex;
-    width: 100%;
-    transition: all 0.5s ease;
-}
-.img-showcase img{
-    min-width: 100%;
-}
-.img-select{
-    display: flex;
-}
-.img-item{
-    margin: 0.3rem;
-}
-.img-item:nth-child(1),
-.img-item:nth-child(2),
-.img-item:nth-child(3){
-    margin-right: 0;
-}
-.img-item:hover{
-    opacity: 0.8;
-}
-.product-content{
-    padding: 2rem 1rem;
-}
-.product-title{
-    font-size: 3rem;
-    text-transform: capitalize;
-    font-weight: 700;
-    position: relative;
-    color: #12263a;
-    margin: 1rem 0;
-}
-.product-title::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 4px;
-    width: 80px;
-    background: #12263a;
-}
-.product-link{
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 0.9rem;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    background: #256eff;
-    color: #fff;
-    padding: 0 0.3rem;
-    transition: all 0.5s ease;
-}
-.product-link:hover{
-    opacity: 0.9;
-}
-.product-rating{
-    color: #ffc107;
-}
-.product-rating span{
-    font-weight: 600;
-    color: #252525;
-}
-.product-price{
-    margin: 1rem 0;
-    font-size: 1rem;
-    font-weight: 700;
-}
-.product-price span{
-    font-weight: 400;
-}
-.last-price span{
-    color: #f64749;
-    text-decoration: line-through;
-}
-.new-price span{
-    color: #256eff;
-}
-.product-detail h2{
-    text-transform: capitalize;
-    color: #12263a;
-    padding-bottom: 0.6rem;
-}
-.product-detail p{
-    font-size: 0.9rem;
-    padding: 0.3rem;
-    opacity: 0.8;
-}
-.product-detail ul{
-    margin: 1rem 0;
-    font-size: 0.9rem;
-}
-.product-detail ul li{
-    margin: 0;
-    list-style: none;
-    background: url(shoes_images/checked.png) left center no-repeat;
-    background-size: 18px;
-    padding-left: 1.7rem;
-    margin: 0.4rem 0;
-    font-weight: 600;
-    opacity: 0.9;
-}
-.product-detail ul li span{
-    font-weight: 400;
-}
-.purchase-info{
-    margin: 1.5rem 0;
-}
-.purchase-info input,
-.purchase-info .btn{
-    border: 1.5px solid #ddd;
-    border-radius: 25px;
-    text-align: center;
-    padding: 0.45rem 0.8rem;
-    outline: 0;
-    margin-right: 0.2rem;
-    margin-bottom: 1rem;
-}
-.purchase-info input{
-    width: 60px;
-}
-.purchase-info .btn{
-    cursor: pointer;
-    color: #fff;
-}
-.purchase-info .btn:first-of-type{
-    background: #256eff;
-}
-.purchase-info .btn:last-of-type{
-    background: #f64749;
-}
-.purchase-info .btn:hover{
-    opacity: 0.9;
-}
-.social-links{
-    display: flex;
-    align-items: center;
-}
-.social-links a{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    color: #000;
-    border: 1px solid #000;
-    margin: 0 0.2rem;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: all 0.5s ease;
-}
-.social-links a:hover{
-    background: #000;
-    border-color: transparent;
-    color: #fff;
+.cart-button:active {
+  transform: scale(.9);
 }
 
-@media screen and (min-width: 992px){
-    .card{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1.5rem;
-    }
-    .card-wrapper{
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .product-imgs{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .product-content{
-        padding-top: 0;
-    }
+.cart-button .fa-shopping-cart {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -10%;
+  font-size: 2em;
+  transform: translate(-50%,-50%);
 }
-</style>
+.cart-button .fa-box {
+  position: absolute;
+  z-index: 3;
+  top: -20%;
+  left: 52%;
+  font-size: 1.2em;
+  transform: translate(-50%,-50%);
+}
+.cart-button span {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  font-size: 1.2em;
+  color: #fff;
+  transform: translate(-50%,-50%);
+}
+.cart-button span.add-to-cart {
+  opacity: 1;
+}
+.cart-button span.added {
+  opacity: 0;
+}
+
+.cart-button.clicked .fa-shopping-cart {
+  animation: cart 1.5s ease-in-out forwards;
+}
+.cart-button.clicked .fa-box {
+  animation: box 1.5s ease-in-out forwards;
+}
+.cart-button.clicked span.add-to-cart {
+  animation: txt1 1.5s ease-in-out forwards;
+}
+.cart-button.clicked span.added {
+  animation: txt2 1.5s ease-in-out forwards;
+}
+@keyframes cart {
+  0% {
+    left: -10%;
+  }
+  40%, 60% {
+    left: 50%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+@keyframes box {
+  0%, 40% {
+    top: -20%;
+  }
+  60% {
+    top: 40%;
+    left: 52%;
+  }
+  100% {
+    top: 40%;
+    left: 112%;
+  }
+}
+@keyframes txt1 {
+  0% {
+    opacity: 1;
+  }
+  20%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes txt2 {
+  0%, 80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+      </style>
+
 
 <script>
-    const imgs = document.querySelectorAll('.img-select a');
-const imgBtns = [...imgs];
-let imgId = 1;
+  const cartButtons = document.querySelectorAll('.cart-button');
 
-imgBtns.forEach((imgItem) => {
-    imgItem.addEventListener('click', (event) => {
-        event.preventDefault();
-        imgId = imgItem.dataset.id;
-        slideImage();
-    });
+cartButtons.forEach(button => {
+  button.addEventListener('click', cartClick);
 });
-
-function slideImage(){
-    const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
-
-    document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+function cartClick() {
+  let button = this;
+  button.classList.add('clicked');
 }
-
-window.addEventListener('resize', slideImage);
 </script>

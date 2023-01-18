@@ -1,49 +1,66 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<%- include('../layouts/layout')-%>
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
- <div class="form-gap"></div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="text-center">
-                  <h3><i class="fa fa-lock fa-4x"></i></h3>
-                  <h2 class="text-center">Forgot Password?</h2>
-                  <p>You can reset your password here.</p>
-                  <div class="panel-body">
-    
-                    <form id="register-form" role="form" action="/otp_verification" class="form" method="post">
-    
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">+91</span>
-                          <input id="email" name="PhoneNumber" maxlength="10" placeholder="Enter number" class="form-control" required  type="number">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <input class="btn btn-lg btn-primary btn-block" type="submit">
-                      </div>
-                    </form>
-    
-                  </div>
+
+
+
+
+
+
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="img/bg/14.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">Checkout</h1>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/login"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Login</a></li>
+                            <li>Forgot Password</li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-	</div>
+        </div>
+    </div>
 </div>
 
-<style>
-    .form-gap {
-    padding-top: 70px;
+
+
+    <!-- BREADCRUMB AREA START -->
+
+<div class="container d-flex flex-column" >
+    <div class="row align-items-center justify-content-center
+        min-vh-80 g-0">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="mb-4">
+              <h5>Forgot Password?</h5>
+              <p class="mb-2">Enter your registered Phone Number to reset the password
+              </p>
+            </div>
+
+            <form id="register-form" role="form" action="/otp_verification" class="form" method="post">
+              <div class="mb-3">
+                <label for="email" class="form-label">Phone</label>
+                <input id="email" name="PhoneNumber" maxlength="10" placeholder="Enter number" class="form-control" required  type="number">
+              </div>
+              <div class="mb-3 d-grid">
+                <button class="theme-btn-1 btn btn-block" type="submit">Send Otp</button>
+              </div>
+              <span>Don't have an account? <a href="/register">sign in</a></span>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <style>
+    ::-webkit-inner-spin-button, 
+    ::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-</style>
+  </style>

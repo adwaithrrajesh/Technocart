@@ -1,34 +1,12 @@
-
-  <body>
-
+<body>
     <%- include('../layouts/layout') -%>
-
-
-
-
-
-
-
-
-
-
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-
-
       <%- include('../partials/sidebar') -%>
-
-
-    
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
-
-
       <%- include('../partials/navbar') -%>
-
-
-
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -42,10 +20,7 @@
                     <h4 class="card-title">Products</h4>
                     </p>
                     <div class="table-responsive">
-
-
                       <!-- starts here -->
-                    
                       <div class="container tm-mt-big tm-mb-big">
                         <div class="row">
                           <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
@@ -58,18 +33,21 @@
                               <div class="row tm-edit-product-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12">
                                   <br>
-
-
                                  <form action="/admin/add_product" method="post" enctype="multipart/form-data">
-
+                                  <label>Product Name</label>
                                   <input type="text" name="ProductName" placeholder="Product Name" required>
                                   <br>
                                   <br>
+                                  <label>Product Discription</label>
                                   <textarea rows="3"  name="Discription" placeholder="discription" style="height: 100px;" required></textarea>
                                   <br>
                                   <br>
+                                  <label>Price</label>
+                                  <br>
                                   <input type="number" name="Price" placeholder="Price" style="width:150px;" required>
                                   <br>
+                                  <br>
+                                  <label>Discount Price</label>
                                   <br>
                                   <input type="number" name="DiscountPrice" placeholder="Discount Price" style="width:150px;" required>
                                   <br>
@@ -77,7 +55,11 @@
                                   <select name="Category" class="btn-primary">
                                   <% Categorydatas.forEach(function(value){%>
                                     <option><%=value.CategoryName%></option>
-                                <%})%>
+                                  <%})%>
+                                  </select>
+                                  <select name="Trending" class="btn-primary">
+                                    <option selected>Main Page</option>
+                                    <option value="true">HomePage</option>
                                   </select>
                                   <br>
                                   <br>
@@ -90,10 +72,7 @@
                           </div>
                         </div>
                       </div>
-
                       <!-- Ends here -->
-
-
                     </div>
                   </div>
                 </div>
@@ -103,12 +82,7 @@
         </div>
       </div>
     </div>
-
-
-
-
     <!-- Style -->
-
     <style>
       input {
   width: 100%;

@@ -75,9 +75,9 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="account-login-inner">
-
-                        
-
+                        <% if ( expressFlash.length > 0 ) { %>
+                            <p style="color: red; margin-left: 60px;"><%= expressFlash %> </p>
+                        <% } %>
                         <!-- Form -->
 
                         <form action="/login_req" class="ltn__form-box contact-form-box" method="post">
@@ -88,8 +88,6 @@
                             </div>
                         </form>
                         <a href="/forgot_password">Forgot Password</a>
-
-
                     </div>
                 </div>
                 <div class="col-lg-6">

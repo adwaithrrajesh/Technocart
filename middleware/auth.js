@@ -14,22 +14,27 @@ module.exports = {
             res.redirect('/admin')
         }
     },
-
-    user_auth:async(req,res,next)=>{
-        let user = req.session.user 
+    BlockAuth:async(req,res,next)=>{
         let login = req.session.loggedIn
         if(login){
-            let user_block = await user_model.findOne({block:user.block})
-            if(user_block.block == true){
-                req.session.loggedIn = false
-                res.render('users/login')
-                console.log('User blocked Auth')
+            let user = req.session.user._id
+            let check = await user_model.findOne({_id:user})
+            if(check.block){
+                req.session.destroy()
+                res.redirect('/login')
             }else{
                 next()
             }
         }else{
             next()
         }
-       
+    },
+    UserAuth:async(req,res,next)=>{
+        let login = req.session.loggedIn
+        if(login){
+            next()
+        }else{
+            res.redirect('/login')
+        }
     }
 }

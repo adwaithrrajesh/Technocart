@@ -9,8 +9,7 @@
                 <div class="col-md-7">
                     <div class="ltn__top-bar-menu">
                         <ul>
-                            <li><a href="mailto:adwaithrrajesh.k@gmail.com?Subject=Flower%20greetings%20to%20you"><i class="icon-mail"></i> adwaithrrajesh.k@gmail.com </a></li>
-                            <li><a href="locations.html"><i class="icon-placeholder"></i> 15/A, Nest Tower, NYC</a></li>
+                            <li><a href="mailto:adwaithrrajesh.k@gmail.com?Subject=Flower%20greetings%20to%20you"><i><img src="/img/mail.png" style="height: 18px;" alt="mail"></i> adwaithrrajesh.k@gmail.com </a></li>
                         </ul>
                     </div>
                 </div>
@@ -22,11 +21,9 @@
                                     <!-- ltn__social-media -->
                                     <div class="ltn__social-media">
                                         <ul>
-                                            <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                            
-                                            <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                            <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                            <li><a href="https://www.linkedin.com/in/adwaith-r-rajesh-333545243/" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                            <li><a href="https://twitter.com/AdwaithRRajesh" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="https://www.instagram.com/adwaithrrajesh/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -38,14 +35,6 @@
         </div>
     </div>
     <!-- ltn__header-top-area end -->
-
-
-
-
-
-
-
-    
     <!-- ltn__header-middle-area start -->
     <div class="ltn__header-middle-area ltn__logo-right-menu-option ltn__header-row-bg-white ltn__header-padding ltn__header-sticky ltn__sticky-bg-white">
         <div class="container">
@@ -53,7 +42,7 @@
                 <div class="col">
                     <div class="site-logo-wrap">
                         <div class="site-logo">
-                            <a href="/"><img src="/img/logo.png" style="height: 45px;" alt="Logo"></a>
+                            <a href="/"><img src="/img/logo.png" style="height: 50px;"  alt="Logo"></a>
                         </div>
                         <div class="get-support clearfix d-none">
                             <div class="get-support-icon">
@@ -72,30 +61,9 @@
                             <div class="ltn__main-menu">
                                 <ul>
                                     <li><a href="/">Home</a></li>
-
-                                    
                                     <li><a href="/shop">Shop</a></li>
-
-
-
-                                    <li><a href="#">About</a>
-                                        <ul>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="service.html">Services</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                            <li><a href="portfolio.html">Gallery</a></li>
-                                            <li><a href="portfolio-2.html">Gallery - 02</a></li>
-                                            <li><a href="portfolio-details.html">Gallery Details</a></li>
-                                            <li><a href="team.html">Team</a></li>
-                                            <li><a href="team-details.html">Team Details</a></li>
-                                            <li><a href="faq.html">FAQ</a></li>
-                                            <li><a href="locations.html">Google Map Locations</a></li>
-                                        </ul>
-                                    </li> 
-
-
-
-                                    <li><a href="/">Contact</a></li>
+                                    <li><a href="#">About</a></li> 
+                                    <li><a href="/contact">Contact</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -106,27 +74,23 @@
 
 
                     <!-- header-search-1 -->
-                      <div class="header-search-wrap">
-                            <div class="header-search-1">
-                                <div class="search-icon">
-
-                                    <!-- Modified -->
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png" style="height:20px;">
-                                </div>
-                            </div>
-
-                            <div class="header-search-1-form">
-                                <form id="#" method="get"  action="#">
-                                    <input type="text" name="search" value="" placeholder="Search here..."/>
-                                    <button type="submit">
-                                        <span><img src="https://cdn-icons-png.flaticon.com/512/3917/3917754.png"  style="height:20px;"    alt="search icon"></span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-
+                      
 
                     <!-- user-menu -->
+                    <div class="mini-cart-icon">
+
+                        <% if (user) { %>
+                            <a href="/wishlist">
+                                <img src="http://cdn.onlinewebfonts.com/svg/img_126692.png" class="wishlist_logo"  alt="Wishlist Image">
+                            </a>
+                            <%} else { %>
+                                <a href="/login" >
+                                    <img src="http://cdn.onlinewebfonts.com/svg/img_126692.png" class="wishlist_logo"  alt="Wishlist Image">
+                                </a>
+                        <% } %>
+                        
+                       
+                    </div>
 
 
 
@@ -134,24 +98,18 @@
                     <div class="ltn__drop-menu user-menu">
                         <ul>
                             <li>
-                                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" style="height:30px;"  alt="user_icon"></a>
+                                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" style="height:30px; margin-top: 10;"  alt="user_icon"></a>
                                 <ul>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Wishlist</a></li>
-                                    
-
-
                                     <% if (user) { %>
+                                        <li><a href="/UserProfile">My Account</a></li>
+                                        <li><a href="/wishlist">Wishlist</a></li>
+                                        <li><a href="/coupon">Coupons</a></li>
                                         <li><a href="/"><%=user.Email%></a></li>
                                         <li><a href="/logout">Logout</a></li>
-                                        
                                         <%} else { %>
-
                                             <li><a href="/login">Login</a></li>
                                             <li><a href="/register">Register</a></li>
-
-                                            
-                                        <% } %>
+                                    <% } %>
                                 </ul>
                             </li>
                         </ul>
@@ -163,13 +121,13 @@
 
                         <% if (user) { %>
                             <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <img src="https://visualpharm.com/assets/482/Shopping%20Cart-595b40b65ba036ed117d241c.svg" style="height: 30px;"  alt="Cart image">
+                                <img src="https://visualpharm.com/assets/482/Shopping%20Cart-595b40b65ba036ed117d241c.svg" style="height:30px; margin-top: 10;" alt="Cart image">
                             </a>
                             <%} else { %>
                                 <a href="/login" >
-                                    <img src="https://visualpharm.com/assets/482/Shopping%20Cart-595b40b65ba036ed117d241c.svg" style="height: 30px;"  alt="Cart image">
+                                    <img src="https://visualpharm.com/assets/482/Shopping%20Cart-595b40b65ba036ed117d241c.svg" style="height:30px; margin-top: 10;" class="cart_logo"  alt="Cart image">
                                 </a>
-                            <% } %>
+                        <% } %>
                         
                        
                     </div>
@@ -194,3 +152,10 @@
     </div>
     <!-- ltn__header-middle-area end -->
 </header>
+
+<style>
+    .wishlist_logo{
+       height: 20px;
+       margin-top: 16px;
+    }
+</style>

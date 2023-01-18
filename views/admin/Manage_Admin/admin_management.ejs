@@ -1,34 +1,13 @@
 
   <body>
-
     <%- include('../layouts/layout') -%>
-
-
-
-
-
-
-
-
-
-
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-
-
       <%- include('../partials/sidebar') -%>
-
-
-    
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
-
-
       <%- include('../partials/navbar') -%>
-
-
-
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -43,7 +22,7 @@
                     </p>
                     <div class="table-responsive">
 
-                      <table class="table table-dark">
+                      <table class="table table-dark" id="Refresh">
                         <thead>
                           <tr>
                             <th> Name </th>
@@ -54,34 +33,24 @@
                           </tr>
                         </thead>
                         <tbody>
-
                           <!-- User view -->
-                          
                           <% admin_details.forEach(function(admin) { %>
                             <tr>
                               <td><%- admin.FirstName -%></td>
                               <td></td>
                               <td><%= admin.Email %></td>
-
-
                               <% if(admin.Allow){ %>
                                 <td>Active</td>
                               <% } else{ %>  
                                 <td>InActive</td>
                              <% } %>
-
-
                              <% if(admin.Allow){ %>
                               <td>
-                                <form action="/admin/block_admin/<%=admin._id%>" method="post">
-                                  <button type="submit" class="btn btn-danger">Block</a>
-                                </form>
+                                  <button type="submit" onclick="Block('<%=admin._id%>')" class="btn btn-danger">Block</a>
                             </td>
                             <% } else{ %>  
                                <td>  
-                                 <form action="/admin/allow_admin/<%=admin._id%>" method="post">
-                                  <button type="submit" class="btn btn-success">Allow</button> 
-                                  </form>
+                                  <button type="submit" class="btn btn-success" onclick="Allow('<%=admin._id%>')">Allow</button> 
                              </td>
                            <% } %>
                             </tr>
@@ -89,9 +58,6 @@
 
                         </tbody>
                       </table>
-
-
-                      
                     </div>
                   </div>
                 </div>
@@ -102,3 +68,31 @@
       </div>
     </div>
   </body>
+
+  <script>
+    function Block(admin) {
+        $.ajax({
+          url: "/admin/block_admin",
+          data: {
+            admin
+          },
+          method: "post",
+          success: (response) => {
+            console.log(response)
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          },
+        });
+      }
+      function Allow(admin) {
+        $.ajax({
+          url: "/admin/allow_admin",
+          data: {
+            admin
+          },
+          method: "post",
+          success: (response) => {
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          },
+        });
+      }
+  </script>

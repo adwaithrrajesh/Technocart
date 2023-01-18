@@ -1,140 +1,431 @@
 <%- include('../layouts/layout') -%>
-<div class="body-wrapper">
+  <div class="body-wrapper">
     <%- include('../partials/shop_header') -%>
-    <!-- MOBILE MENU START -->
-    <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
+      <!-- MOBILE MENU START -->
+      <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Mobile Menu Button -->
-                    <div class="mobile-menu-toggle d-lg-none">
-                        <span>MENU</span>
-                        <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
-                            <svg viewBox="0 0 800 600">
-                                <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
-                                <path d="M300,320 L540,320" id="middle"></path>
-                                <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Mobile Menu Button -->
+              <div class="mobile-menu-toggle d-lg-none">
+                <span>MENU</span>
+                <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                  <svg viewBox="0 0 800 600">
+                    <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                      id="top"></path>
+                    <path d="M300,320 L540,320" id="middle"></path>
+                    <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                      id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                  </svg>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <!-- MOBILE MENU END -->
+      </div>
+      <!-- MOBILE MENU END -->
 
-    <!-- Utilize Cart Menu Start -->
-    
-    <!-- Utilize Cart Menu End -->
-    <%- include('../partials/shop_cart_menu') -%>
+      <!-- Utilize Cart Menu Start -->
 
+      <!-- Utilize Cart Menu End -->
+      <%- include('../partials/shop_cart_menu') -%>
 
-    <!-- Utilize Mobile Menu Start -->
-   <%- include('../partials/mobile_menu') -%>
+        <!-- Utilize Mobile Menu Start -->
+        <%- include('../partials/mobile_menu') -%>
 
-    
+          <div class="ltn__utilize-overlay"></div>
 
-    <div class="ltn__utilize-overlay"></div>
-
-    <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="img/bg/14.jpg">
-        <div class="container">
-            <div class="row">
+          <!-- BREADCRUMB AREA START -->
+          <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image" data-bs-bg="img/bg/14.jpg">
+            <div class="container">
+              <div class="row">
                 <div class="col-lg-12">
-                    <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Cart</h1>
-                        <div class="ltn__breadcrumb-list">
-                            <ul>
-                                <li><a href="index.html"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Cart</li>
-                            </ul>
-                        </div>
+                  <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">Cart</h1>
+                    <div class="ltn__breadcrumb-list">
+                      <ul>
+                        <li>
+                          <a href="/"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span>
+                            Home</a>
+                        </li>
+                        <li>Cart</li>
+                      </ul>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <!-- BREADCRUMB AREA END -->
-
-    <!-- SHOPING CART AREA START -->
-    <div class="liton__shoping-cart-area mb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+          </div>
+          <!-- BREADCRUMB AREA END -->
+          <!-- SHOPING CART AREA START -->
+          <div class="liton__shoping-cart-area mb-120">
+            <div class="container">
+              <div class="row">
+                <% if (CouponInUse) { %>
+                  <div class="col-lg-12">
                     <div class="shoping-cart-inner">
-                        <div class="shoping-cart-table table-responsive">
-                            <table class="table">
-                                <tbody>
+                      <div class="shoping-cart-table table-responsive">
+                        <table class="table" id="CartPrice">
+                          <tbody>
+                            <% cart.Products.forEach(function(view) { %>
+                              <tr>
+                                <td class="cart-product-remove"
+                                  onclick="Couponused()">
+                                  x
+                                </td>
+                                <td class="cart-product-image">
+                                  <a href="/productDetails/<%=view.Product._id%>"><img
+                                      src="/images/products/<%=view.Product.Image[0].filename %>" /></a>
+                                </td>
+                                <td class="cart-product-info">
+                                  <h5>
+                                    <a href="/productDetails">
+                                      <%= view.Product.ProductName%>
+                                    </a>
+                                  </h5>
+                                </td>
+                                <td class="cart-product-price">
+                                  <div class="product-price">
+                                    <del>₹<%= view.Product.Price%></del>
+                                    <span>₹<%= view.Product.DiscountPrice%></span>
+                                  </div>
+                                </td>
+                                <td class="cart-product-quantity">
+                                  <div class="input-group w-auto justify-content-end align-items-center">
+                                    <input type="button" value="-"
+                                      class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                      onclick="Couponused()"
+                                      data-field="quantity" />
+                                    <input type="number" step="1" max="10" id="<%=view.Product._id%>"
+                                      value="<%=view.Quantity%>" name="quantity"
+                                      class="quantity-field border-0 text-center w-25" />
+                                    <input type="button" value="+"
+                                      class="button-plus border rounded-circle icon-shape icon-sm"
+                                      onclick="Couponused()"
+                                      data-field="quantity" />
+                                  </div>
+                                </td>
+                                <td class="cart-product-subtotal">₹<%= view.Product.DiscountPrice * view.Quantity%>
+                                </td>
+                              </tr>
+                              <% }); %>
+                                <tr class="cart-coupon-row">
+                                  <td colspan="6">
+                                    <div class="cart-coupon">
+                                      <p style="color: green;"> Applied Coupon :<%=CouponCode%></p>
+                                      <button type="submit" onclick="RemoveCoupon('<%=CouponCode%>')"  style="text-transform: uppercase"
+                                        class="btn theme-btn-2 btn-effect-2">
+                                        Remove Coupon
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                          </tbody>
+                        </table>
+                      </div>
 
-                          <% cart_products.forEach(function(view) { %> 
-                                    <tr>
-                                        <td class="cart-product-remove">x</td>
-                                        <td class="cart-product-image">
-                                            <a href="product-details.html"><img src="img/product/1.png" alt="#"></a>
-                                        </td>
-                                        <td class="cart-product-info">
-                                            <h4><a href="/productDetails"><%=view.Products.Product%></a></h4>
-                                        </td>
-                                        <td class="cart-product-price">$149.00</td>
-                                        <td class="cart-product-quantity">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                            </div>
-                                        </td>
-                                        <td class="cart-product-subtotal">$298.00</td>
-                                    </tr>
-                                    <% }); %> 
-
-
-                                    <tr class="cart-coupon-row">
-                                        <td colspan="6">
-                                            <div class="cart-coupon">
-                                                <input type="text" name="cart-coupon" placeholder="Coupon code">
-                                                <button type="submit" class="btn theme-btn-2 btn-effect-2">Apply Coupon</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                      <div class="shoping-cart-total mt-50">
+                        <h4>Cart Totals</h4>
+                        <table class="table" id="CartTotal">
+                          <tbody>
+                            <% cart.Products.forEach(function(view) { %>
+                              <tr>
+                                <td>
+                                  <%=view.Product.ProductName%>
+                                </td>
+                                <td><strong id="multiplied">₹<%= view.Product.DiscountPrice * view.Quantity%></strong>
+                                </td>
+                              </tr>
+                              <% }); %>
+                              <tr>
+                                <td><strong style="color: green;">Discount</strong></td>
+                                <td><strong style="color: green;">₹<%= cart.CouponDiscount%></strong></td>
+                              </tr>
+                                <tr>
+                                  <td><strong>Delevery Charge</strong></td>
+                                  <td><strong>Free</strong></td>
+                                </tr>
+                                <tr>
+                                  <td><strong>Order Total</strong></td>
+                                  <td><strong>₹<%= cart.Total%></strong></td>
+                                </tr>
+                          </tbody>
+                        </table>
+                        <div class="btn-wrapper text-right">
+                          <a href="/checkout" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
                         </div>
-                        <div class="shoping-cart-total mt-50">
-                            <h4>Cart Totals</h4>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Cart Subtotal</td>
-                                        <td>$618.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping and Handing</td>
-                                        <td>$15.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vat</td>
-                                        <td>$00.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Order Total</strong></td>
-                                        <td><strong>$633.00</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-wrapper text-right">
-                                <a href="checkout.html" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
-                            </div>
-                        </div>
+                        </form>
+                      </div>
                     </div>
-                </div>
+                  </div>
+                <%} else { %>
+                    <div class="col-lg-12">
+                      <div class="shoping-cart-inner">
+                        <div class="shoping-cart-table table-responsive">
+                          <table class="table" id="CartPrice">
+                            <tbody>
+                              <% if (!cart || cart.Products.length==0) { %>
+                                <h1>No Items Added</h1>
+                                <%} else { %>
+                                  <% cart.Products.forEach(function(view) { %>
+                                    <tr>
+                                      <td class="cart-product-remove"
+                                        onclick="RemoveProduct('<%=view.Product._id%>','<%=view.Quantity%>')">
+                                        x
+                                      </td>
+                                      <td class="cart-product-image">
+                                        <a href="/productDetails/<%=view.Product._id%>"><img
+                                            src="/images/products/<%=view.Product.Image[0].filename %>" /></a>
+                                      </td>
+                                      <td class="cart-product-info">
+                                        <h5>
+                                          <a href="/productDetails">
+                                            <%= view.Product.ProductName%>
+                                          </a>
+                                        </h5>
+                                      </td>
+                                      <td class="cart-product-price">
+                                        <div class="product-price">
+                                          <del>₹<%= view.Product.Price%></del>
+                                          <span>₹<%= view.Product.DiscountPrice%></span>
+                                        </div>
+                                      </td>
+                                      <td class="cart-product-quantity">
+                                        <div class="input-group w-auto justify-content-end align-items-center">
+                                          <input type="button" value="-"
+                                            class="button-minus border rounded-circle icon-shape icon-sm mx-1"
+                                            onclick="Quantity('<%=view._id%>','<%=view.Product._id%>',-1,'<%=view.Product.Price%>')"
+                                            data-field="quantity" />
+                                          <input type="number" step="1" max="10" id="<%=view.Product._id%>"
+                                            value="<%=view.Quantity%>" name="quantity"
+                                            class="quantity-field border-0 text-center w-25" />
+                                          <input type="button" value="+"
+                                            class="button-plus border rounded-circle icon-shape icon-sm"
+                                            onclick="Quantity('<%=view._id%>','<%=view.Product._id%>',1,'<%=view.Product.Price%>')"
+                                            data-field="quantity" />
+                                        </div>
+                                      </td>
+                                      <td class="cart-product-subtotal">₹<%= view.Product.DiscountPrice *
+                                          view.Quantity%>
+                                      </td>
+                                    </tr>
+                                    <% }); %>
+                                      <tr class="cart-coupon-row">
+                                        <td colspan="6">
+                                          <div class="cart-coupon">
+                                          <form id="coupon">
+                                            <input type="text" name="coupon" placeholder="Coupon code" />
+                                            <button type="submit" style="text-transform: uppercase"
+                                              class="btn theme-btn-2 btn-effect-2">
+                                              Apply Coupon
+                                            </button>
+                                          </form>
+                                          </div>
+                                        </td>
+                                      </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="shoping-cart-total mt-50">
+                          <h4>Cart Totals</h4>
+                          <table class="table" id="CartTotal">
+                            <tbody>
+                              <% cart.Products.forEach(function(view) { %>
+                                <tr>
+                                  <td>
+                                    <%=view.Product.ProductName%>
+                                  </td>
+                                  <td><strong id="multiplied">₹<%= view.Product.DiscountPrice * view.Quantity%></strong>
+                                  </td>
+                                </tr>
+                                <% }); %>
+                                <tr>
+                                  <td><strong style="color: green;">Discount</strong></td>
+                                  <td><strong style="color: green;">₹<%= cart.CouponDiscount%></strong></td>
+                                </tr>
+                                  <tr>
+                                    <td><strong>Delevery Charge</strong></td>
+                                    <td><strong>Free</strong></td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Order Total</strong></td>
+                                    <td><strong>₹<%= cart.Total%></strong></td>
+                                  </tr>
+                            </tbody>
+                          </table>
+                          <div class="btn-wrapper text-right">
+                            <a href="/checkout" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                      <% } %>
+                    </div>
+                    <% } %>
+              </div>
             </div>
-        </div>
-    </div>
-    <!-- SHOPING CART AREA END -->
+          </div>
+          <!-- SHOPING CART AREA END -->
+  </div>
+  <!-- Ajax -->
+  <script>
+    function Couponused(){
+      Swal.fire({
+              icon: "error",
+              title: "Please Remove Coupon",
+              text: "Please Remove the Coupon to Continue"
+            })
+    }
+  </script>
+  <script>
+    function RemoveCoupon(Code){
+      $.ajax({
+        url:'/removeCoupon',
+        method: 'post',
+        data:{
+          Code
+        },
+        success:(response)=>{
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Coupon Removed',
+            customClass: 'swal-wide',
+            showConfirmButton: false,
+            timer: 1000
+          }).then(() => {
+            location.reload()
+          })
+        }
+      })
+    }
+  </script>
+  <script>
+    $("#coupon").submit((e) => {
+      e.preventDefault()
+      let Coupon
+      let couponcheck = document.querySelectorAll('input[name="coupon"]')
+      for (coupon of couponcheck) {
+        if (coupon) {
+          Coupon = coupon.value
+          break
+        }
+      }
+      $.ajax({
+        url: '/couponcode',
+        method: 'post',
+        data: $('#coupon').serialize(),
+        success: (response) => {
+          if(response.NeedAmount){
+            Swal.fire({
+              icon: "warning",
+              title: "Please Add More Products",
+              text: "Please add more products to use coupon "
+            })
+          }else if(response.AlreadyTaken){
+            Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Coupon Already Used',
+            customClass: 'swal-wide',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          }
+          else if(response.Invalid){
+            Swal.fire({
+              icon: "error",
+              title: "Invalid Coupon",
+              text: "This Coupon Code Doesnot Exist"
+            })
+          }
+          else{
+            Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Coupon Applied',
+            customClass: 'swal-wide',
+            showConfirmButton: false,
+            timer: 1000
+          }).then(() => {
+            location.reload()
+          })
+          }
+        }
+      })
 
-</div>
-<!-- Body main wrapper end -->
+    })
+    function Quantity(cart, product, count, price) {
+      let quantity = parseInt(document.getElementById(product).value);
+      let Count = parseInt(count);
+      $.ajax({
+        url: "/changequantity",
+        data: {
+          CartId: cart,
+          ProductId: product,
+          Count: count,
+          Price: price
+        },
+        method: "post",
+        success: (response) => {
+          if (response.removeProduct) {
+            Swal.fire({
+              icon: "error",
+              title: "Item Deleted",
+              text: "This Item has been deleted"
+            }).then(() => {
+              location.reload();
+            });
+          }
+          if (response) {
+            document.getElementById(product).value = quantity + Count;
+            $('#CartPrice').load(location.href + " #CartPrice>*", "")
+            $('#CartTotal').load(location.href + " #CartTotal>*", "")
+          }
+        },
+      });
+    }
 
-    <!-- All JS Plugins -->
-    <script src="js/plugins.js"></script>
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
+    function RemoveProduct(Product, Quantity) {
+      Swal.fire({
+        title: "Remove from cart",
+        text: "Are You sure want to Remove this from your cart",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success").then(
+            (res) => {
+              $.ajax({
+                url: "/remove_product",
+                data: {
+                  ProductId: Product,
+                  Quantity: Quantity
+                },
+                method: "post",
+                success: (response) => {
+                  location.reload();
+                },
+              });
+            }
+          );
+        }
+      });
+    }
+  </script>
+  <!-- Body main wrapper end -->
+  <!-- All JS Plugins -->
+  <script src="./js/plugins.js"></script>
+  <!-- Main JS -->
+  <script src="./js/main.js"></script>
 
+  <style>
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>

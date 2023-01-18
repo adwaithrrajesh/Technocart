@@ -6,6 +6,8 @@ const logger = require('morgan');
 const session = require('express-session')
 const mongoose = require('./config/connection')
 const multer = require('multer')
+const flash = require('express-flash')
+
 
 
 var usersRouter = require('./routes/users');
@@ -42,6 +44,8 @@ app.use(session({
     cookie: { maxAge: oneDay },
     resave: false 
 }));
+app.use(flash());
+
 
 // Routes
 

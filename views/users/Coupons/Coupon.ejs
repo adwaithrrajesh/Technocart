@@ -1,0 +1,128 @@
+<%- include('../layouts/layout') -%>
+<div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="img/bg/14.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">Account</h1>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
+                            <li>Coupon</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% coupon.forEach(function(view) { %>
+    <div class="containerbox">
+        <div class="coupon-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/290/290919.png" class="logo">
+            <h2><%=view.CouponName%></h2>
+            <h3>Get <%=view.Percentage%>% off for Purchase upto ₹<%=view.MinAmount%><br></h3>
+            <di class="coupon-row">
+                <span id="cpnCode"><%=view.CouponCode%></span>
+                <span id="cpnBtn">Copy Code</span>
+            </di>
+            <p style="color: white;">Valid Till: <%=view.ExpiryDate%></p>
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+        </div>
+    </div>
+<% }); %> 
+
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+    
+}
+.containerbox{
+    display: flex;
+    height: 40vh;
+    align-items: center;
+    justify-content: center;
+
+}
+.coupon-card{
+    background: linear-gradient(135deg, #7158fe, #9d4de6);
+    color: #fff;
+    text-align: center;
+    padding: 10px 80px;
+    border-radius: 15px;
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.15);
+    position: relative;
+
+}
+.logo{
+    width: 80px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+}
+.coupon-card h3{
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 40px;
+
+}
+.coupon-card p{
+    font-size: 15px;
+
+}
+.coupon-row{
+    display: flex;
+    align-items: center;
+    margin: 25px auto;
+    width: fit-content;
+
+}
+#cpnCode{
+    border: 1px dashed #fff;
+    padding: 10px 20px;
+    border-right: 0;
+
+}
+#cpnBtn{
+    border: 1px solid #fff;
+    background: #fff;
+    padding: 10px 20px;
+    color: #7158fe;
+    cursor: pointer;
+}
+.circle1, .circle2{
+    background: #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+.circle1{
+    left: -25px;
+}
+.circle2{
+    right: -25px;
+}
+
+</style>
+<script>
+     var cpnBtn = document.getElementById("cpnBtn");
+            var cpnCode = document.getElementById("cpnCode");
+
+            cpnBtn.onclick = function(){
+                navigator.clipboard.writeText(cpnCode.innerHTML);
+                cpnBtn.innerHTML ="COPIED";
+                setTimeout(function(){
+                    cpnBtn.innerHTML="COPY CODE";
+                }, 3000);
+            }
+</script>

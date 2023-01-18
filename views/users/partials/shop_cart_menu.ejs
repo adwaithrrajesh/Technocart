@@ -5,29 +5,34 @@
             <button class="ltn__utilize-close">×</button>
         </div>
         <div class="mini-cart-product-area ltn__scrollbar">
-            
-            
-            <div class="mini-cart-item clearfix">
-                <div class="mini-cart-img">
-                    <a href="#"><img src="img/product/4.png" alt="Image"></a>
-                    <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                </div>
-                <div class="mini-cart-info">
-                    <h6><a href="#">Thermometer Gun</a></h6>
-                    <span class="mini-cart-quantity">1 x $68.00</span>
-                </div>
-            </div>
-        </div>
-        <div class="mini-cart-footer">
-            <div class="mini-cart-sub-total">
-                <h5>Subtotal: <span>$310.00</span></h5>
-            </div>
-            <div class="btn-wrapper">
-                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-            </div>
-            <p>Free Shipping on All Orders Over $100!</p>
-        </div>
 
+
+            <% if (user) { %>
+            <% if (cart) { %>
+            <% cart.Products.forEach(function(view) { %>
+                <div class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="/images/products/<%=view.Product.Image[0].filename %>" alt="Image"></a>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="/cart"><%=view.Product.ProductName%></a></h6>
+                        <span class="mini-cart-quantity"> <%=view.Quantity%> x $<%=view.Product.Price%></span>
+                    </div>
+                </div>
+             <% }); %> 
+             <%} %>
+             <%}%>   
+
+                <div class="mini-cart-footer">
+                    <div class="mini-cart-sub-total">
+                        <h5>Subtotal: <span>$310.00</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="/cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                        <a href="/cart" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    </div>
+                    <p>Free Shipping on All Orders Over $100!</p>
+                </div>
+        </div>
     </div>
 </div>

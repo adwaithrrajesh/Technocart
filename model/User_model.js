@@ -27,8 +27,14 @@ let user = new Schema({
     block:{
         type:Boolean,
         default:false
+    },
+    UsedCoupons:[{
+        type: String
+    }],
+    CouponInUse:{
+        type:Boolean,
+        default:false
     }
-
 })
 
 const userCollection = mongoose.model("users",user)

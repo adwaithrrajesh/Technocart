@@ -1,34 +1,12 @@
-
-  <body>
-
+<body>
     <%- include('../layouts/layout') -%>
-
-
-
-
-
-
-
-
-
-
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-
-
       <%- include('../partials/sidebar') -%>
-
-
-    
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
-
-
       <%- include('../partials/navbar') -%>
-
-
-
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -41,8 +19,7 @@
                   <div class="card-body">
                     <h4 class="card-title">Inverse table</h4>
                     </p>
-                    <div class="table-responsive">
-
+                    <div class="table-responsive" id="Refresh">
                       <table class="table table-dark">
                         <thead>
                           <tr>
@@ -55,50 +32,29 @@
                           </tr>
                         </thead>
                         <tbody>
-
-
-
-
                           <!-- User view -->
-
-
                           <% user_view.forEach(function(user) { %>
                             <tr>
                               <td><%- user.Firstname -%></td>
                               <td></td>
                               <td><%= user.Email %></td>
                               <td> +91 <%= user.PhoneNumber %> </td>
-
-
                               <% if(user.block){ %>
                                 <td>Inactive</td>
                               <% } else{ %>  
                                 <td>Active</td>
                              <% } %>
-
-
                              <% if(user.block){ %>
                               <td>
-
-                                <form action="/admin/user_unblock/<%=user._id%>" method="post">
-                                  <button type="submit" class="btn btn-success">Unblock</a>
-                                </form>
-
+                                  <button type="submit" onclick="Unblock('<%=user._id%>')" class="btn btn-success">Unblock</a>
                             </td>
                             <% } else{ %>  
                               <td>  
-
-                                 <form action="/admin/block_user/<%=user._id%>" method="post">
-                                  <button type="submit" class="btn btn-danger">Block</button> 
-                                  </form>
-                                
+                                <button type="submit" onclick="Block('<%=user._id%>')" class="btn btn-danger">block</a>
                             </td>
                            <% } %>
                             </tr>
                          <% }); %> 
-                         
-
-
                         </tbody>
                       </table>
                     </div>
@@ -111,3 +67,66 @@
       </div>
     </div>
   </body>
+  
+  <script>
+    function Unblock(user) {
+      Swal.fire({
+      title: 'Unblock User',
+      text: "Do you want to Unblock this User",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Block'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Unblocked',
+          'This user has been Unblocked',
+          'success'
+        ).then(()=>{
+          $.ajax({
+          url: "/admin/user_unblock",
+          data: {
+            user
+          },
+          method: "post",
+          success: (response) => {
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          }
+        });
+    })
+      }
+    })
+  }
+      function Block(user) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to block this User",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Block'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Blocked',
+          'This user has been Blocked',
+          'success'
+        ).then(()=>{
+          $.ajax({
+          url: "/admin/block_user",
+          data: {
+            user
+          },
+          method: "post",
+          success: (response) => {
+              $('#Refresh').load(location.href+" #Refresh>*","")
+          }
+        })
+    })
+      }
+    })
+  }
+  </script>

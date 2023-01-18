@@ -10,6 +10,10 @@ const { product_view } = require('../helpers/product_helpers');
 const { getMaxListeners } = require('../model/product_model');
 const Category_model = require('../model/Category_model')
 const product_model = require('../model/product_model')
+const expressFlash = require('express-flash')
+const user_model = require('../model/User_model')
+const coupon_model = require('../model/coupon')
+const order_model = require('../model/order_model')
 
 
 module.exports = {
@@ -19,7 +23,7 @@ module.exports = {
         if(req.session.adminLoggedin){
             res.redirect('/admin/home')
           }else{
-            res.render('admin/admin_login')
+            res.render('admin/admin_login',{expressFlash: req.flash('Success')})
           }
     },
     // Login Post
@@ -30,11 +34,25 @@ module.exports = {
               req.session.adminLoggedin = true
               res.redirect('/admin/home')
             }else{
-              console.log('An error found at Admin side')
+              req.flash('Success','Incorrect Email or Password');
+              res.redirect('/admin')
             }
           })
     },
-
+    // register
+    Register:(req,res)=>{
+      res.render('admin/Manage_Admin/admin_register',{expressFlash: req.flash('Success')})
+    },
+    Register_req:(req,res)=>{
+      adminHelper.adminRegister(req.body).then((status)=>{
+        if(status){
+          res.redirect('/admin')
+        }else{
+          req.flash('Success','Admin Already Exist');
+          res.redirect('/admin/register')
+        }
+      })
+    },
     // Logout
     logout:(req,res)=>{
         req.session.destroy()
@@ -43,8 +61,14 @@ module.exports = {
 
     // Home
     home:(req,res)=>{
-        res.header('Cache-control', 'no-cache,private, no-store, must-revalidate,max-stale=0,post-check=0')
-        res.render('admin/admin_home')
+      adminHelper.Dashboard().then(async(Orders)=>{
+        let Activeusers = await user_model.find({block:false}).countDocuments()
+        let Blockedusers = await user_model.find({block:true}).countDocuments()
+        let TotalProducts = await product_model.find({Allow:true}).countDocuments()
+        let HiddenProducts = await product_model.find({Allow:false}).countDocuments()
+        let TotalDelivery = await order_model.find({OrderStatus:'Delivered'}).countDocuments()
+        res.render('admin/admin_home',{Orders,Activeusers,Blockedusers,TotalProducts,HiddenProducts,TotalDelivery})
+      })
       },
 
     // User Management
@@ -55,13 +79,17 @@ module.exports = {
     },
     // User block
     user_block:(req,res)=>{
-        user_helpers.userBlocker(req.params._id)
-        res.redirect('/admin/user_management')
+      let user = req.body.user
+        user_helpers.userBlocker(user).then(()=>{
+          res.json(true)
+        })
       },
     // User unblock
     user_unblock:(req,res)=>{
-        user_helpers.userUnblock(req.params._id)
-        res.redirect('/admin/user_management')
+      let user = req.body.user
+        user_helpers.userUnblock(user).then(()=>{
+          res.json(true)
+        })
       },
     // Product Management
     productManagement: async(req,res)=>{
@@ -82,31 +110,58 @@ module.exports = {
           res.render('admin/Manage_Admin/admin_management',{admin_details})
         ])
       }else{
-        res.redirect('/admin/')
+        res.redirect('/admin')
       }
-    },
-    // register
-    Register:(req,res)=>{
-      res.render('admin/Manage_Admin/admin_register')
-    },
-    Register_req:(req,res)=>{
-      adminHelper.adminRegister(req.body).then((status)=>{
-        if(status){
-          res.redirect('/admin')
-        }else{
-          console.log('Admin Already Exist')
-        }
-      })
     },
     // Admin Allow 
     adminAllow:(req,res)=>{
-      adminHelper.adminAllow(req.params._id)
-      res.redirect('/admin/admin_management')
+      let admin = req.body.admin
+      adminHelper.adminAllow(admin).then(()=>{
+        res.json(true)
+      })
     },
     // Admin Block 
     adminBlock:(req,res)=>{
-      adminHelper.BlockAdmin(req.params._id)
-        res.redirect('/admin/admin_management')
+      let admin = req.body.admin
+      adminHelper.BlockAdmin(admin).then(()=>{
+        res.json(true)
+      })
+    },
+    OrderManagement:(req,res)=>{
+      adminHelper.OrderView().then((orders)=>{
+        res.render('admin/OrderManagement/Order_management',{orders})
+      })
+    },
+    ChangeOrderStatus:(req,res)=>{
+      let OrderId = req.body.OrderId
+      let value = req.body.value
+      adminHelper.ChangeOrderStatus(OrderId,value).then(()=>{
+        res.json(true)
+      })
+    },
+    Banner:(req,res)=>{
+      res.render('admin/BannerManagement/Banner_Management')
+    },
+    BannerUpload:(req,res)=>{
+      console.log(req.file)
+    },
+    CouponManagement: async(req,res)=>{
+      let Coupon = await coupon_model.find()
+      res.render('admin/ManageCoupon/Coupon_Management',{Coupon})
+    },
+    AddCoupon:(req,res)=>{
+      res.render('admin/ManageCoupon/CreateCoupon')
+    },
+    CreateCoupon:(req,res)=>{
+      let data = req.body
+      adminHelper.CreateCoupon(data).then(()=>{
+        res.redirect('/admin/CouponManagement')
+      })
+    },
+    DeleteCoupon:(req,res)=>{
+      let CouponId = req.body.CouponId
+      adminHelper.DeleteCoupon(CouponId).then(()=>{
+        res.json(true)
+      })
     }
-
 }

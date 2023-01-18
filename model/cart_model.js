@@ -15,9 +15,22 @@ let Cart_collection = new Schema({
         ref:'products',
         },
         Quantity:{
+            type:Number,
+            default:1
+        },
+        Subtotal:{
             type:Number
         }
-    }]
+    }],
+    CouponDiscount:{
+        type:Number
+    },
+    GrandTotal:{
+        type:Number
+    },
+    Total:{
+        type : Number
+    }
 })
 
 

@@ -1,370 +1,681 @@
-
-
 <%- include('./layouts/layout') -%>
 
+  <body>
+    <div class="body-wrapper">
+      <%- include('./partials/shop_header') -%>
+        <!-- HEADER AREA END -->
 
-
-
-
-<body>
-<div class="body-wrapper">
-
-    <!-- HEADER AREA START (header-3) -->
-
-
-
-    <%- include('./partials/shop_header') -%>
-
-
-
-
-    <!-- HEADER AREA END -->
-
-    <!-- MOBILE MENU START -->
-    <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
-        <div class="container">
+        <!-- MOBILE MENU START -->
+        <div class="mobile-header-menu-fullwidth mb-30 d-block d-lg-none">
+          <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <!-- Mobile Menu Button -->
-                    <div class="mobile-menu-toggle d-lg-none">
-                        <span>MENU</span>
-                        <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
-                            <svg viewBox="0 0 800 600">
-                                <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
-                                <path d="M300,320 L540,320" id="middle"></path>
-                                <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
-                            </svg>
-                        </a>
-                    </div>
+              <div class="col-lg-12">
+                <!-- Mobile Menu Button -->
+                <div class="mobile-menu-toggle d-lg-none">
+                  <span>MENU</span>
+                  <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                    <svg viewBox="0 0 800 600">
+                      <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                        id="top"></path>
+                      <path d="M300,320 L540,320" id="middle"></path>
+                      <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                        id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                    </svg>
+                  </a>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    <!-- MOBILE MENU END -->
+        <!-- MOBILE MENU END -->
 
-    <!-- Utilize Cart Menu Start -->
+        <!-- Utilize Mobile Menu Start -->
+        <%- include('./partials/mobile_menu') -%>
+          <!-- Utilize Mobile Menu End -->
 
-    <%- include('./partials/shop_cart_menu') -%>
+          <div class="ltn__utilize-overlay"></div>
 
-   
-
-    <!-- Utilize Mobile Menu Start -->
-    <%- include('./partials/mobile_menu') -%>
-
-    
-    <!-- Utilize Mobile Menu End -->
-
-    <div class="ltn__utilize-overlay"></div>
-
-    <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image "  data-bs-bg="img/bg/14.jpg">
-        <div class="container">
-            <div class="row">
+          <!-- BREADCRUMB AREA START -->
+          <div class="ltn__breadcrumb-area text-left bg-overlay-white-30 bg-image" data-bs-bg="img/bg/14.jpg">
+            <div class="container">
+              <div class="row">
                 <div class="col-lg-12">
-                    <div class="ltn__breadcrumb-inner">
-                        <h1 class="page-title">Shop</h1>
-                        <div class="ltn__breadcrumb-list">
-                            <ul>
-                                <li><a href="/"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span> Home</a></li>
-                                <li>Shop</li>
+                  <div class="ltn__breadcrumb-inner">
+                    <h1 class="page-title">Shop</h1>
+                    <div class="ltn__breadcrumb-list">
+                      <ul>
+                        <li>
+                          <a href="/"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span>
+                            Home</a>
+                        </li>
+                        <li>Shop</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- BREADCRUMB AREA END -->
+
+          <!-- PRODUCT DETAILS AREA START -->
+          <div class="ltn__product-area ltn__product-gutter mb-120">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 order-lg-2 mb-120">
+                  <div class="ltn__shop-options">
+                    <ul>
+                      <li>
+                        <div class="short-by text-center">
+                          <div class="dropdown">
+                            <a class="btn btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Sort Price
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li>
+                                <a class="dropdown-item" href="/sort_low">Price: Low to High</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="/sort_high">Price: High to Low</a>
+                              </li>
                             </ul>
+                          </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- BREADCRUMB AREA END -->
-    
-    <!-- PRODUCT DETAILS AREA START -->
-    <div class="ltn__product-area ltn__product-gutter mb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ltn__shop-options">
-                        <ul>
-                            <li>
-                               <div class="short-by text-center">
-                                    <!-- <select class="nice-select">
-                                        <option>All</option> -->
-                                    <a href="/shop">All</a>
-                                    <% Categories.forEach(function(category) { %>
-                                    <a href="/category_opt?_id=<%=category._id%>&&cName=<%=category.CategoryName%>" style="padding-left: 25px;"><%=category.CategoryName%></a>
-                                    <% }); %> 
-                                    <!-- </select> -->
-                                </div> 
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane fade active show" id="liton_product_grid">
-                            <div class="ltn__product-tab-content-inner ltn__product-grid-view">
-                                <div class="row">
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="liton_product_grid">
+                      <div class="ltn__product-tab-content-inner ltn__product-grid-view">
+                        <div class="row">
+                          <!-- ltn__product-item -->
+                          <% products_view.forEach(function(view) { %>
+                            <!-- Product start -->
+                            <% if(view.Allow){ %>
+                              <div class="col-xl-3 col-lg-4 col-sm-6 col-6" style="width: 230px;">
+                                <div class="ltn__product-item ltn__product-item-3 text-center" style="width: 230px;">
+                                  <div class="product-img">
+                                    <a href="/productDetails/<%=view._id%>"><img
+                                        src="/images/products/<%=view.Image[0].filename %>" alt="#"
+                                        style="width: 230px;" /></a>
 
-
-
-                          <% products_view.forEach(function(view) { %> 
-                                    <!-- Product start -->
-                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
-                                        <div class="ltn__product-item ltn__product-item-3 text-center">
-                                            <div class="product-img">
-                                                <a href="/productDetails/<%=view._id%>"><img src="/images/products/<%=view.Image[0].filename %>" alt="#"></a>
-
-                                                <div class="product-hover-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal" style="height: 50px;">
-                                                                <i class="far fa-eye" style="margin-top: 15px;"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" style="height: 50px;" >
-                                                                <i class="fas fa-shopping-cart" style="margin-top: 15px;"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" style="height: 50px;">
-                                                                <i class="far fa-heart" style="margin-top: 15px;"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="product-info">
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                        <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    </ul>
-                                                </div><a href="/productDetails/<%= view._id%>">
-                                                    <h2 class="product-title"><%= view.ProductName %></h2>
-                                                </a> 
-                                      
-                                                <div class="product-price">
-                                                    <span>$<%=  view.Price%></span>
-                                                    <del>$<%= view.DiscountPrice%></del>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="product-hover-action">
+                                      <ul>
+                                        <% if (user) { %>
+                                          <li>
+                                            <a onclick="Wishlist('<%=view._id%>')" href="" title="Wishlist"
+                                              data-bs-toggle="modal" data-bs-target="#" style="height: 50px">
+                                              <i class="far fa-heart" style="margin-top: 15px"></i></a>
+                                          </li>
+                                          <%} else { %>
+                                            <li>
+                                              <a href="" title="Wishlist" data-bs-toggle="modal"
+                                                data-bs-target="#liton_wishlist_modal" style="height: 50px">
+                                                <i class="far fa-heart" style="margin-top: 15px"></i></a>
+                                            </li>
+                                            <% } %>
+                                      </ul>
                                     </div>
-                                  <% }); %> 
-                                    <!-- Products end --->
-                                    <div class="ltn__pagination-area text-center">
-                                        <div class="ltn__pagination">
-                                            <ul>
-                                                <% for(var i=1; i<=pagination_count; i++) {%>
-                                                <li><a href="/shop/?page=<%=i%>"><%=i%></a></li>
-                                                <% } %>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- PRODUCT DETAILS AREA END -->
-
-
-
-    <!-- MODAL AREA START (Quick View Modal) -->
-    <div class="ltn__modal-area ltn__quick-view-modal-area">
-        <div class="modal fade" id="quick_view_modal" tabindex="-1">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <!-- <i class="fas fa-times"></i> -->
-                        </button>
-                    </div>
-
-
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-
-
-                        <div class="col-lg-6 col-12">
-                                <div class="modal-product-img">
-                                    <img src="" alt="Quick view">
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-12">
-                                <div class="modal-product-info">
+                                  </div>
+                                  <div class="product-info">
                                     <div class="product-ratting">
-                                        <ul>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                            <li><a href="#"><i class="far fa-star"></i></a></li>
-                                            <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                        </ul>
+                                      <ul>
+                                        <li>
+                                          <a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li>
+                                          <a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li>
+                                          <a href="#"><i class="fas fa-star"></i></a>
+                                        </li>
+                                        <li>
+                                          <a href="#"><i class="fas fa-star-half-alt"></i></a>
+                                        </li>
+                                        <li>
+                                          <a href="#"><i class="far fa-star"></i></a>
+                                        </li>
+                                      </ul>
                                     </div>
-
-                                    <h3>Hello</h3>
+                                    <a href="/productDetails/<%= view._id%>" style="width: 250px;">
+                                      <h2 class="product-title">
+                                        <%= view.ProductName %>
+                                      </h2>
+                                    </a>
                                     <div class="product-price">
-                                        <span>$149.00</span>
-                                        <del>$165.00</del>
+                                      <span>₹<%= view.Price%></span>
+                                      <del>₹<%= view.DiscountPrice%></del>
                                     </div>
-
-
-
-                                            <div class="modal-product-meta ltn__product-details-menu-1">
-                                                <ul>
-                                                    <li>
-                                                        <strong>Category:</strong> 
-                                                        <span>
-                                                            <a href="#">Parts</a>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ltn__product-details-menu-2">
-                                                <ul>
-                                                    <li>
-                                                        <div class="cart-plus-minus">
-                                                            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
-                                                            <i class="fas fa-shopping-cart"></i>
-                                                            <span>ADD TO CART</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="ltn__product-details-menu-3">
-                                                <ul>
-                                                    <li>
-                                                        <a href="#" class="" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                                            <i class="far fa-heart"></i>
-                                                            <span>Add to Wishlist</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
+                                  </div>
                                 </div>
-                             </div>
-                         </div>
+                              </div>
+                              <% }%>
+                                <% }); %>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                  <div class="ltn__pagination-area text-center">
+                    <div class="ltn__pagination">
+                      <ul>
+                        <% for(var i=1; i<=pagination_count; i++) {%>
+                          <li><a href="/shop/?page=<%=i%>">
+                              <%=i%>
+                            </a></li>
+                          <% } %>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
+                <div class="col-lg-4 mb-120">
+                  <aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
+                    <!-- Category Widget -->
+                    <div class="widget ltn__menu-widget">
+                      <h4 class="ltn__widget-title ltn__widget-title-border">
+                        Product categories
+                      </h4>
+                      <ul>
+                        <li>
+                          <a href="/shop">All<span><i class="fas fa-long-arrow-alt-right"></i></span></a>
+                        </li>
+                        <% Categories.forEach(function(category) { %>
+                          <li>
+                            <a href="/category_opt?_id=<%=category._id%>&&cName=<%=category.CategoryName%>">
+                              <%=category.CategoryName%><span><i class="fas fa-long-arrow-alt-right"></i></span>
+                            </a>
+                          </li>
+                          <% }); %>
+                      </ul>
+                    </div>
+                    <!-- Price Filter Widget -->
+                    <div class="widget ltn__price-filter-widget">
+                      <h4 class="ltn__widget-title ltn__widget-title-border">
+                        Filter by price
+                      </h4>
+
+
+                      <form action="/filterprice" method="post">
+                      <div class="d-flex">
+                        <div class="wrapper">
+                          <div class="price-input">
+                            <div class="field">
+                              <span>Min₹</span>
+                              <input type="number" class="input-min" value="2500">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                              <span>Max₹</span>
+                              <input type="number" class="input-max" value="7500">
+                            </div>
+                          </div>
+                          <div class="slider">
+                            <div class="progress"></div>
+                          </div>
+                          <div class="range-input">
+                            <input type="range" class="range-min" name="min" min="0" max="10000" value="2500" step="100">
+                            <input type="range" class="range-max" name="max" min="0" max="10000" value="7500" step="100">
+                          </div>
+                          <br>
+                          <button style="background-color: rgb(195, 234, 195); margin-left: 40%">Filter</button>
+                        </div>
+                        <br>
+                      </div>
+                    </form>
+                  </aside>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
+          </div>
+          <!-- PRODUCT DETAILS AREA END -->
 
-
-
-    <!-- MODAL AREA END -->
-    <!-- MODAL AREA START (Add To Cart Modal) -->
-    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
-            <div class="modal-dialog modal-md" role="document">
+          <!-- MODAL AREA START (Quick View Modal) -->
+          <div class="ltn__modal-area ltn__quick-view-modal-area">
+            <div class="modal fade" id="quick_view_modal" tabindex="-1">
+              <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="modal-product-img">
-                                            <img src="img/product/1.png" alt="#">
-                                        </div>
-                                         <div class="modal-product-info">
-                                            <h5><a href="product-details.html">Digital Stethoscope</a></h5>
-                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
-                                            <div class="btn-wrapper">
-                                                <a href="/" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                                                <a href="checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                                            </div>
-                                         </div>
-                                         <!-- additional-info -->
-                                         <div class="additional-info d-none">
-                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
-                                            <div class="payment-method">
-                                                <img src="img/icons/payment.png" alt="#">
-                                            </div>
-                                         </div>
+                  <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <!-- <i class="fas fa-times"></i> -->
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="ltn__quick-view-modal-inner">
+                      <div class="modal-product-item">
+                        <div class="row">
+                          <div class="col-lg-6 col-12">
+                            <div class="modal-product-img">
+                              <img src="img/product/" alt="#" />
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-12">
+                            <div class="modal-product-info">
+                              <div class="product-ratting">
+                                <ul>
+                                  <li>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#"><i class="fas fa-star"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#"><i class="fas fa-star-half-alt"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#"><i class="far fa-star"></i></a>
+                                  </li>
+                                  <li class="review-total">
+                                    <a href="#"> ( 95 Reviews )</a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <h3>Name</h3>
+                              <div class="product-price">
+                                <span>$149.00</span>
+                                <del>$165.00</del>
+                              </div>
+                              <div class="modal-product-meta ltn__product-details-menu-1">
+                                <ul>
+                                  <li>
+                                    <strong>Categories:</strong>
+                                    <span>
+                                      <a href="#">Parts</a>
+                                      <a href="#">Car</a>
+                                      <a href="#">Seat</a>
+                                      <a href="#">Cover</a>
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="ltn__product-details-menu-2">
+                                <ul>
+                                  <li>
+                                    <div class="cart-plus-minus">
+                                      <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box" />
                                     </div>
-                                </div>
-                             </div>
-                         </div>
+                                  </li>
+                                  <li>
+                                    <a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart"
+                                      data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                      <i class="fas fa-shopping-cart"></i>
+                                      <span>ADD TO CART</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="ltn__product-details-menu-3">
+                                <ul>
+                                  <li>
+                                    <a href="#" class="" title="Wishlist" data-bs-toggle="modal"
+                                      data-bs-target="#liton_wishlist_modal">
+                                      <i class="far fa-heart"></i>
+                                      <span>Add to Wishlist</span>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#" class="" title="Compare" data-bs-toggle="modal"
+                                      data-bs-target="#quick_view_modal">
+                                      <i class="fas fa-exchange-alt"></i>
+                                      <span>Compare</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <hr />
+                              <div class="ltn__social-media">
+                                <ul>
+                                  <li>Share:</li>
+                                  <li>
+                                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a>
+                                  </li>
+                                  <li>
+                                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <!-- MODAL AREA END -->
-    <!-- MODAL AREA START (Wishlist Modal) -->
-    <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
-            <div class="modal-dialog modal-md" role="document">
+          </div>
+          <!-- MODAL AREA END -->
+
+          <!-- MODAL AREA START (Add To Cart Modal) -->
+          <div class="ltn__modal-area ltn__add-to-cart-modal-area">
+            <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
+              <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                  <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="ltn__quick-view-modal-inner">
+                      <div class="modal-product-item">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="modal-product-img">
+                              <img src="img/product/1.png" alt="#" />
+                            </div>
+                            <div class="modal-product-info">
+                              <h5>
+                                <a href="product-details.html">Digital Stethoscope</a>
+                              </h5>
+                              <p class="added-cart">
+                                <i class="fa fa-check-circle"></i> Successfully added
+                                to your Cart
+                              </p>
+                              <div class="btn-wrapper">
+                                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                                <a href="/checkout" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                              </div>
+                            </div>
+                            <!-- additional-info -->
+                            <div class="additional-info d-none">
+                              <p>
+                                We want to give you <b>10% discount</b> for your first
+                                order, <br />
+                                Use discount code at checkout
+                              </p>
+                              <div class="payment-method">
+                                <img src="img/icons/payment.png" alt="#" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="modal-body">
-                         <div class="ltn__quick-view-modal-inner">
-                             <div class="modal-product-item">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="modal-product-img">
-                                            <img src="img/product/7.png" alt="#">
-                                        </div>
-                                         <div class="modal-product-info">
-                                            <h5><a href="product-details.html">Digital Stethoscope</a></h5>
-                                            <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
-                                            <div class="btn-wrapper">
-                                                <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
-                                            </div>
-                                         </div>
-                                         <!-- additional-info -->
-                                         <div class="additional-info d-none">
-                                            <p>We want to give you <b>10% discount</b> for your first order, <br>  Use discount code at checkout</p>
-                                            <div class="payment-method">
-                                                <img src="img/icons/payment.png" alt="#">
-                                            </div>
-                                         </div>
-                                    </div>
-                                </div>
-                             </div>
-                         </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+          <!-- MODAL AREA END -->
+
+          <!-- MODAL AREA START (Wishlist Modal) -->
+          <div class="ltn__modal-area ltn__add-to-cart-modal-area">
+            <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+              <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="ltn__quick-view-modal-inner">
+                      <div class="modal-product-item">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="modal-product-info">
+                              <p class="added-cart">
+                                Please Login to Add to Wishlist
+                              </p>
+                              <div class="btn-wrapper">
+                                <a href="/login" class="theme-btn-1 btn btn-effect-1">Login</a>
+                              </div>
+                            </div>
+                            <!-- additional-info -->
+                            <div class="additional-info d-none">
+                              <p>
+                                We want to give you <b>10% discount</b> for your first
+                                order, <br />
+                                Use discount code at checkout
+                              </p>
+                              <div class="payment-method">
+                                <img src="img/icons/payment.png" alt="#" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- MODAL AREA END -->
     </div>
-    <!-- MODAL AREA END -->
+    <!-- Body main wrapper end -->
 
-    
 
-</div>
-<!-- Body main wrapper end -->
+    <script>
+      function Wishlist(Product) {
+        $.ajax({
+          url: "/addWishlist",
+          data: {
+            ProductId: Product,
+          },
+          method: "post",
+          success: (response) => {
+            if (response.Product_Exist) {
+              Swal.fire({
+                icon: "success",
+                title: "Already Added",
+                text: "This item has been Already added to wishlist"
+              });
+            }
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Item Added to Wishlist",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+        });
+      }
+    </script>
+
+    <style>
+      /* Import Google Font - Poppins */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      ::selection {
+        color: #fff;
+        background: #17a2b8;
+      }
+
+      .wrapper {
+        width: 400px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px 25px 40px;
+      }
+
+      header h2 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      header p {
+        margin-top: 5px;
+        font-size: 16px;
+      }
+
+      .price-input {
+        width: 100%;
+        display: flex;
+        margin: 30px 0 35px;
+      }
+
+      .price-input .field {
+        display: flex;
+        width: 100%;
+        height: 45px;
+        align-items: center;
+      }
+
+      .field input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        font-size: 19px;
+        margin-left: 12px;
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid #999;
+        -moz-appearance: textfield;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      .price-input .separator {
+        width: 130px;
+        display: flex;
+        font-size: 19px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slider {
+        height: 5px;
+        position: relative;
+        background: #ddd;
+        border-radius: 5px;
+      }
+
+      .slider .progress {
+        height: 100%;
+        left: 25%;
+        right: 25%;
+        position: absolute;
+        border-radius: 5px;
+        background: #17a2b8;
+      }
+
+      .range-input {
+        position: relative;
+      }
+
+      .range-input input {
+        position: absolute;
+        width: 100%;
+        height: 5px;
+        top: -5px;
+        background: none;
+        pointer-events: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        height: 17px;
+        width: 17px;
+        border-radius: 50%;
+        background: #17a2b8;
+        pointer-events: auto;
+        -webkit-appearance: none;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        height: 17px;
+        width: 17px;
+        border: none;
+        border-radius: 50%;
+        background: #17a2b8;
+        pointer-events: auto;
+        -moz-appearance: none;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Support */
+      .support-box {
+        top: 2rem;
+        position: relative;
+        bottom: 0;
+        text-align: center;
+        display: block;
+      }
+
+      .b-btn {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .b-btn.paypal i {
+        color: blue;
+      }
+
+      .b-btn:hover {
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .b-btn i {
+        font-size: 20px;
+        color: yellow;
+        margin-top: 2rem;
+      }
+    </style>
+    <script>
+      const rangeInput = document.querySelectorAll(".range-input input"),
+        priceInput = document.querySelectorAll(".price-input input"),
+        range = document.querySelector(".slider .progress");
+      let priceGap = 1000;
+
+      priceInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+          let minPrice = parseInt(priceInput[0].value),
+            maxPrice = parseInt(priceInput[1].value);
+
+          if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+            if (e.target.className === "input-min") {
+              rangeInput[0].value = minPrice;
+              range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+            } else {
+              rangeInput[1].value = maxPrice;
+              range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+            }
+          }
+        });
+      });
+
+      rangeInput.forEach((input) => {
+        input.addEventListener("input", (e) => {
+          let minVal = parseInt(rangeInput[0].value),
+            maxVal = parseInt(rangeInput[1].value);
+          if (maxVal - minVal < priceGap) {
+            if (e.target.className === "range-min") {
+              rangeInput[0].value = maxVal - priceGap;
+            } else {
+              rangeInput[1].value = minVal + priceGap;
+            }
+          } else {
+            priceInput[0].value = minVal;
+            priceInput[1].value = maxVal;
+            range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+            range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+          }
+        });
+      });
+
+    </script>
 
     <!-- All JS Plugins -->
     <script src="/js/plugins.js"></script>
     <!-- Main JS -->
     <script src="/js/main.js"></script>
-  
-
-
+  </body>

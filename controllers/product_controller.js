@@ -6,21 +6,23 @@ const { product_view, updateProduct } = require('../helpers/product_helpers');
 const { Category } = require('./admin_controller');
 const Category_model = require('../model/Category_model');
 const user_helpers = require('../helpers/user_helpers');
+const cart_model = require('../model/cart_model')
 
 
 module.exports={
 
   // Insert Product
     InsertProduct:(req,res)=>{
-        console.log(req.body,'products')
-        console.log(req.files)
+      let trend = req.body.Trending
+      console.log(trend)
         let product = {
           ProductName:req.body.ProductName,
           Image:req.files,
           Discription:req.body.Discription,
           Price:req.body.Price,
           DiscountPrice:req.body.DiscountPrice,
-          Category:req.body.Category
+          Category:req.body.Category,
+          Trending:trend
         }
         productHelpers.addProduct(product).then((status)=>{
           if(status){
@@ -31,10 +33,19 @@ module.exports={
           }
         })
       },
-      // Delete Product
-      DeleteProduct:(req,res)=>{
-        productHelpers.Delete_product(req.params._id)
-          res.redirect('/admin/product_management')
+      // Hide Product
+      HideProduct:(req,res)=>{
+        let Product = req.body.Product
+        productHelpers.Hide_product(Product).then(()=>{
+          res.json(true)
+        })
+      },
+      // Show Product
+      ShowProduct:(req,res)=>{
+        let Product = req.body.Product
+        productHelpers.UnHide_product(Product).then(()=>{
+          res.json(true)
+        })
       },
        // edit product
     edit_product:(req,res)=>{
@@ -61,7 +72,7 @@ module.exports={
       // Product Details
      ProductDetails:(req,res)=>{
       let user = req.session.user
-      user_helpers.ProductDetails(req.params._id).then((product_det)=>{
+      user_helpers.ProductDetails(req.params._id).then(async(product_det)=>{
         res.render('users/Products/product_details',{product_det,user})
       })    
      },
@@ -78,11 +89,10 @@ module.exports={
      },
     //  DeleteCategory
     DeleteCategory:(req,res)=>{
-      productHelpers.Delete_Category(req.params._id).then((deleted)=>{
-        res.redirect('/admin/category')
+      let Category = req.body.Category
+      productHelpers.Delete_Category(Category).then(()=>{
+        res.json(true)
       })
     }
-
-
   }
 

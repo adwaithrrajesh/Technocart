@@ -14,9 +14,16 @@ module.exports={
             res(true)
         })
     },
-    Delete_product:(ProductData)=>{
+    Hide_product:(ProductData)=>{
         return new Promise(async(res,rej)=>{
-          await product_model.deleteOne({_id:objectid(ProductData)})
+            await product_model.findByIdAndUpdate({_id:objectid(ProductData)},{$set:{Allow:false}})
+            res(true)
+        })
+    },
+    UnHide_product:(Data)=>{
+        return new Promise(async(res,rej)=>{
+            await product_model.findByIdAndUpdate({_id:objectid(Data)},{$set:{Allow:true}})
+            res(true)
         })
     },
     editProduct:(ProductData)=>{
@@ -46,9 +53,9 @@ module.exports={
         })
     },
     Delete_Category:(Category_data)=>{
-        return new Promise(async(res,rej)=>{
-          let deleted =  await Category_model.deleteOne({_id:objectid(Category_data)})
-          res(deleted)
+        return new Promise(async(resolve,reject)=>{
+         await Category_model.deleteOne({_id:objectid(Category_data)})
+          resolve()
         })
     }
 } 

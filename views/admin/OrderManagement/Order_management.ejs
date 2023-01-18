@@ -1,0 +1,89 @@
+<body>
+    <%- include('../layouts/layout') -%>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <%- include('../partials/sidebar') -%>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_navbar.html -->
+      <%- include('../partials/navbar') -%>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Order Management </h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <div class="row ">
+                        <div class="col-12 grid-margin">
+                          <div class="card">
+                            <div class="card-body">
+                              <h4 class="card-title">Order Status</h4>
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th> Order ID </th>
+                                      <th> Total </th>
+                                      <th> Payment Mode </th>
+                                      <th> Status </th>
+                                      <th> Order Status </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="Refresh">
+                                   <% orders.forEach(function(view) { %>
+                                     <tr>
+                                      <td>
+                                         <span class="ps-2"><%=view._id%></span>
+                                       </td>
+                                       <td> $<%=view.Total%> </td>
+                                       <td> <%=view.PaymentMethod%> </td>
+                                       <td> <%=view.OrderStatus%> </td>
+                                       <td>
+                                        <select class="form-select"  id="OrderStatus" onchange="OrderStatus('<%=view._id%>',this.value)"  style="background-color: rgb(47, 47, 57); color: aliceblue; width: 180px;"  aria-label="Default select example" >
+                                          <option selected value="<%=view.OrderStatus%>"><%=view.OrderStatus%></option>
+                                          <option value="Order Processed">Order Processed</option>
+                                          <option value="Shipped">Shipped</option>
+                                          <option value="Out of delivery">Out of Delivery</option>
+                                          <option value="Delivered">Delivered</option>
+                                        </select>                                      
+                                       </td>
+                                     </tr>
+                                    <% }); %>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+
+  <script>
+    function OrderStatus(OrderId,value){
+      $.ajax({
+                url: "/admin/Change_status",
+                data: {
+                 OrderId,
+                 value
+                },
+                method: "post",
+                success: (response) => {
+                  $('#Refresh').load(location.href+" #Refresh>*","")
+                },
+              })
+    }
+  </script>

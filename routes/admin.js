@@ -22,26 +22,30 @@ const ProductController = require('../controllers/product_controller')
   router.get('/admin_management',admin_auth,Controller.adminManagement)
   router.get('/register',Controller.Register)
   router.get('/category',admin_auth,ProductController.Category)
-
+  router.get('/order_management',admin_auth,Controller.OrderManagement)
+  router.get('/Banner_Management',admin_auth,Controller.Banner)
+  router.get('/CouponManagement',Controller.CouponManagement)
+  router.get('/CreateCoupon',Controller.AddCoupon)
 
   
-
   
   // Post
   router.post('/admin_log',Controller.login_post)
   router.post('/admin_reg',Controller.Register_req)
-  router.post('/block_user/:_id',admin_auth,Controller.user_block)
-  router.post('/user_unblock/:_id',admin_auth,Controller.user_unblock)
-  router.post('/allow_admin/:_id',admin_auth,Controller.adminAllow)  
-  router.post('/block_admin/:_id',admin_auth,Controller.adminBlock)  
+  router.post('/block_user',admin_auth,Controller.user_block)
+  router.post('/user_unblock',admin_auth,Controller.user_unblock)
+  router.post('/allow_admin',admin_auth,Controller.adminAllow)  
+  router.post('/block_admin',admin_auth,Controller.adminBlock)  
   router.post('/add_product',admin_auth,upload.array('Image',4),ProductController.InsertProduct)
-  router.post('/delete_product/:_id',admin_auth,ProductController.DeleteProduct)
+  router.post('/hide_product',admin_auth,ProductController.HideProduct)
+  router.post('/show_product',admin_auth,ProductController.ShowProduct)
   router.post('/edit_product/:_id',admin_auth,ProductController.edit_product)
   router.post('/update_product/:_id',admin_auth,upload.single('Image'),ProductController.update_product)
   router.post('/add_category',ProductController.addCategory)  
-  router.post('/delete_category/:_id',ProductController.DeleteCategory)
- 
-
+  router.post('/delete_category',ProductController.DeleteCategory)
+  router.post('/Change_status',admin_auth,Controller.ChangeOrderStatus)
+  router.post('/coupon',admin_auth,Controller.CreateCoupon)
+  router.post('/DeleteCoupon',Controller.DeleteCoupon)
 
 
 

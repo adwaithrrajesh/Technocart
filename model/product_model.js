@@ -27,9 +27,15 @@ let Product = new Schema({
     Category:{
         type:String,
         require:true
+    },
+    Allow :{
+        type:Boolean,
+        default:true
+    },
+    Trending:{
+        type:Boolean,
+        default:false
     }
-
-
 })
 
 const productCollection = mongoose.model("products",Product)
