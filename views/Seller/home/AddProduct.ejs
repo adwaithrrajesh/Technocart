@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+
+<%- include('../partials/layout') -%>
+
+    <body>
+        <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen}">
+            <!-- Desktop sidebar -->
+            <div class="flex flex-col flex-1">
+                <%- include('../partials/header') -%>
+
+                    <main class="h-full pb-16 overflow-y-auto">
+                        <div class="container px-6 mx-auto grid">
+                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+                                Sell Product
+                            </h2>
+
+                            <!-- Inputs with icons -->
+                            <form action="">
+                            <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Product Name</span>
+                                    <!-- focus-within sets the color for the icon when input is focused -->
+                                    <div
+                                        class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                                        <input
+                                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                                            placeholder="Product Name" required />
+                                    </div>
+                                </label>
+                                <br>
+                                <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Discription</span>
+                                    <!-- focus-within sets the color for the icon when input is focused -->
+                                    <div
+                                        class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                                        <input
+                                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                                            placeholder="Discription" required />
+                                    </div>
+                                </label>
+                                <br>
+                                <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Price</span>
+                                    <!-- focus-within sets the color for the icon when input is focused -->
+                                    <div
+                                        class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                                        <input type="number"
+                                        style="width: 120px;"
+                                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                                            placeholder="Price" required />
+                                    </div>
+                                </label>
+                                <br>
+                                <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Price</span>
+                                    <!-- focus-within sets the color for the icon when input is focused -->
+                                    <div
+                                        class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                                        <select name="Category" style="width: 170px; height: 30px;" required>
+                                            <option value="">fdsakl</option>
+                                            <option value="">fdsakl</option>
+                                            <option value="">fdsakl</option>
+                                        </select>
+                                    </div>
+                                </label>
+                                <br>
+                                <label class="block text-sm">
+                                    <span class="text-gray-700 dark:text-gray-400">Price</span>
+                                    <div
+                                        class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+                                        <input type="file" multiple name="Image" accept="image/*" required
+                                            class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input"
+                                            placeholder="Price" />
+                                    </div>
+                                </label>
+                                <br>
+                                <label class="block text-sm">
+                                    <button type="submit" class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Sell Product</button>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    </main>
+                        <a href="/seller" style="text-align: center;" class="px-10 py-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                         See Details </a>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+<style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        display: none;
+      }
+</style>

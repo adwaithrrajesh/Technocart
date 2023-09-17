@@ -61,7 +61,7 @@ module.exports={
         })
       },
       // Product Details
-     ProductDetails:(req,res)=>{
+     productDetails:(req,res)=>{
       let user = req.session.user
       user_helpers.ProductDetails(req.params._id).then(async(product_det)=>{
         res.render('users/Products/product_details',{product_det,user})

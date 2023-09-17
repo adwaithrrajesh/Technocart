@@ -1,0 +1,120 @@
+<div class="container">
+    <h3 class="title">OTP Verification</h3>
+    <p class="sub-title">
+      Enter the OTP you received to your Phone number
+    </p>
+
+    <form action="/seller/otp-send" method="post">
+    <div class="wrapper">
+      <input name="no1" type="text" class="field 1" maxlength="1">
+      <input name="no2" type="text" class="field 2" maxlength="1">
+      <input name="no3" type="text" class="field 3" maxlength="1">
+      <input name="no4" type="text" class="field 4" maxlength="1">
+      <input name="no5" type="text" class="field 5" maxlength="1">
+      <input name="no6" type="text" class="field 6" maxlength="1">
+    </div>
+    <button type="submit" class="resend"  style="margin-left: 170px; font-size: 20px;">
+      Verify
+      <i class="fa fa-caret-right"></i>
+    </button>
+  </form>
+  </div>
+
+
+  <!-- Style -->
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background-color: #EAF5F6;
+}
+
+.container {
+  width: 500px;
+  padding: 50px;
+  background-color: #ffffff;
+  border-radius: 25px;
+}
+
+h3.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #093030;
+  margin-bottom: 25px;
+}
+
+p.sub-title {
+  color: #B5BAB8;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+p span.phone-number {
+  display: block;
+  color: #093030;
+  font-weight: 600;
+}
+
+.wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: space-between;
+}
+
+.wrapper input.field {
+  width: 50px;
+  line-height: 75px;
+  font-size: 32px;
+  border: none;
+  background-color: #EAF5F6;
+  border-radius: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #093030;
+  margin-bottom: 25px;
+}
+
+.wrapper input.field:focus {
+  outline: none;
+}
+
+button.resend {
+  background-color: transparent;
+  border: none;
+  font-weight: 600;
+  color: #3DAFE1;
+  cursor: pointer;
+}
+
+button.resend i {
+  margin-left: 5px;
+}
+  </style>
+
+
+<script>
+    const inputFields = document.querySelectorAll("input.field");
+
+inputFields.forEach((field) => {
+  field.addEventListener("input", handleInput);
+});
+
+function handleInput(e) {
+  let inputField = e.target;
+  if (inputField.value.length >= 1) {
+    let nextField = inputField.nextElementSibling;
+    return nextField && nextField.focus();
+  }
+}
+
+</script>

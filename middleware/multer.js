@@ -1,7 +1,6 @@
 const multer = require('multer')
 const path = require('path')
 
-
   // Multer (file upload setup)
   const storage = multer.diskStorage({
     destination: (req,files,cb)=>{

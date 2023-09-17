@@ -4,7 +4,7 @@ const router = express.Router();
 const userHelper = require("../helpers/user_helpers");
 const user_model = require("../model/User_model");
 const auth = require("../middleware/auth");
-const user_auth = auth.user_auth;
+const user_auth = auth.UserAuth;
 const otp = require("../helpers/otp");
 const { Sms, verify } = require("../helpers/otp");
 const { countDocuments, findOne } = require("../model/User_model");
@@ -53,7 +53,7 @@ module.exports = {
     }
   },
   //Login post
-  login_post: (req, res) => {
+  loginPost: (req, res) => {
     userHelper.doLogin(req.body).then((response) => {
       if (response.status == true) {
         req.session.loggedIn = true;
@@ -129,11 +129,11 @@ module.exports = {
     });
   },
   // Forgot password
-  forgot_password: (req, res) => {
+  forgotPassword: (req, res) => {
     res.render("users/ForgotPassword/Enter_number");
   },
   // Give phone number input
-  phonenumber: (req, res) => {
+  phoneNumber: (req, res) => {
     req.session.Phone_Number = req.body.PhoneNumber;
     let phone_num = req.session.Phone_Number;
     Sms(phone_num); //otp
@@ -155,7 +155,7 @@ module.exports = {
     res.render("users/ForgotPassword/change_password");
   },
   // Change Password
-  change_password: (req, res) => {
+  changePassword: (req, res) => {
     userHelper.ChangePassword(req.body).then((status) => {
       if (status) {
         res.redirect("/login");
@@ -184,7 +184,7 @@ module.exports = {
     });
   },
   // Category
-  Category_option: (req, res) => {
+  categoryOption: (req, res) => {
     userHelper.Category_option(req.query.cName).then(async (products_view) => {
       let user = req.session.user;
       let pagination_count = 0;
@@ -198,7 +198,7 @@ module.exports = {
     });
   },
   // Cart View
-  Cart_View: async (req, res) => {
+  cartView: async (req, res) => {
       let user = req.session.user;
       let user_check = await cart_model.findOne({ UserId: user._id });
       let userCheck = await user_model.findOne({ _id: user });
@@ -224,7 +224,7 @@ module.exports = {
       res.json(response);
     });
   },
-  RemoveProduct: (req, res) => {
+  removeProduct: (req, res) => {
     User = req.session.user._id;
     Product = req.body.ProductId;
     Quantity = req.body.Quantity;
@@ -232,14 +232,14 @@ module.exports = {
       res.json(response);
     });
   },
-  AddCart: (req, res) => {
+  addCart: (req, res) => {
     let productid = req.body.ProductId;
     let user_id = req.session.user._id;
     userHelper.AddToCart(productid, user_id).then(() => {
       res.json(true);
     });
   },
-  SortLow: (req, res) => {
+  sortLow: (req, res) => {
     let user = req.session.user;
     userHelper.SortLow().then(async ({ products_view, pagination_count }) => {
       let Categories = await Category_model.find();
@@ -251,7 +251,7 @@ module.exports = {
       });
     });
   },
-  SortHigh: (req, res) => {
+  sortHigh: (req, res) => {
     let user = req.session.user;
     userHelper.SortHigh().then(async ({ products_view, pagination_count }) => {
       let Categories = await Category_model.find();
@@ -263,7 +263,7 @@ module.exports = {
       });
     });
   },
-  Wishlist: async (req, res) => {
+  wishList: async (req, res) => {
     let user = req.session.user;
       userHelper.ViewWishlist(user._id).then((wishlistItems) => {
         res.render("users/Products/wishlist", { user, wishlistItems });
@@ -283,21 +283,21 @@ module.exports = {
       res.json(true);
     });
   },
-  UserProfile: async (req, res) => {
+  userProfile: async (req, res) => {
     let user = req.session.user;
     let address = await address_model.find({ UserId: user._id });
     userHelper.ViewOrder(user._id).then(async (orders) => {
       res.render("users/Profile/profile", { user, orders, address });
     });
   },
-  ChangeDetails: async (req, res) => {
+  changeDetails: async (req, res) => {
     let userId = req.session.user._id;
     let Details = req.body;
     userHelper.ChangeUserDetails(userId, Details).then(() => {
       res.render("users/Profile/profile");
     });
   },
-  Checkout: async (req, res) => {
+  checkout: async (req, res) => {
     let user = req.session.user;
     if (user) {
       let address_check = await address_model.findOne({ UserId: user._id });
@@ -310,31 +310,31 @@ module.exports = {
             res.render("users/Products/checkout", { user, address, cart });
           });
       } else {
-        res.redirect("/add_address");
+        res.redirect("/add-address");
       }
     } else {
       res.redirect("/login");
     }
   },
-  Address_page: (req, res) => {
+  addressPage: (req, res) => {
     let user = req.session.user;
     res.render("users/Products/add_address", { user });
   },
-  StoreAddress: (req, res) => {
+  storeAddress: (req, res) => {
     let Address = req.body;
     let user = req.session.user._id;
     userHelper.AddAddress(user, Address).then(() => {
       res.redirect("/checkout");
     });
   },
-  RemoveAddress: (req, res) => {
+  removeAddress: (req, res) => {
     let user = req.session.user._id;
     let address = req.body.Address;
     userHelper.RemoveAddress(user, address).then(() => {
       res.redirect("/checkout");
     });
   },
-  OrderSubmit: (req, res) => {
+  orderSubmit: (req, res) => {
     let Payment = req.body.Payment;
     let address = req.body.id;
     req.session.address = address;
@@ -356,7 +356,7 @@ module.exports = {
       }
     }
   },
-  VerifyPayment: (req, res) => {
+  verifyPayment: (req, res) => {
     userHelper.VerifyPayment(req.body).then(() => {
       let address = req.session.address;
       let User_Id = req.session.user._id;
@@ -366,10 +366,10 @@ module.exports = {
       });
     });
   },
-  OrderSuccess: (req, res) => {
+  orderSuccess: (req, res) => {
     res.render("users/Order/order_successful");
   },
-  OrderStatus: (req, res) => {
+  orderStatus: (req, res) => {
     let orderId = req.params._id;
     let user = req.session.user;
     let cart;
@@ -377,7 +377,7 @@ module.exports = {
       res.render("users/Order/order_tracking", { user, cart, Order });
     });
   },
-  CancelOrder: (req, res) => {
+  cancelOrder: (req, res) => {
     let Order = req.body.OrderId;
     userHelper.CancelOrder(Order).then(() => {
       res.json(true);
@@ -388,7 +388,7 @@ module.exports = {
     let cart;
     res.render("users/aboutproject/contactme", { user, cart });
   },
-  CouponCode: async (req, res) => {
+  couponCode: async (req, res) => {
     let date = Date();
     let Code = req.body.coupon;
     let User = req.session.user._id;
@@ -419,13 +419,13 @@ module.exports = {
         }
       }
   },
-  CouponView: async (req, res) => {
+  couponView: async (req, res) => {
     let user = req.session.user;
     let cart;
     let coupon = await coupon_model.find();
     res.render("users/Coupons/Coupon", { user, cart, coupon });
   },
-  FilterPrice: (req, res) => {
+  filterPrice: (req, res) => {
     let min = req.body.min;
     let max = req.body.max;
     userHelper
@@ -441,14 +441,11 @@ module.exports = {
         });
       });
   },
-  RemoveCoupon: (req, res) => {
+  removeCoupon: (req, res) => {
     let Code = req.body.Code;
     let User = req.session.user._id;
     userHelper.RemoveCoupon(Code, User).then(() => {
       res.json(true);
     });
-  },
-  DownloadReport: (req,res)=>{
-    console.log(req.body)
   }
 };

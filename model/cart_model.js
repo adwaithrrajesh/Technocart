@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const ObjectId = require('objectid');
-
 const Schema = mongoose.Schema 
-
 
 let Cart_collection = new Schema({
     UserId:{

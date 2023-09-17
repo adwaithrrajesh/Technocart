@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const url = 'mongodb+srv://Technocart:1234@cluster0.nm1zgko.mongodb.net/cluster0?retryWrites=true&w=majority'
-module.exports = async function connection(){
-    try{
-
+require('dotenv').config()
+const url = process.env.MONGODB
+module.exports = async () => {
+    try {
         mongoose.connect(
             url,
             (err, data) => {
@@ -12,7 +12,7 @@ module.exports = async function connection(){
             }
         )
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 }

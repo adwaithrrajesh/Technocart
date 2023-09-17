@@ -3,9 +3,6 @@ const user_model = require('../model/User_model')
 const path = require('path')
 const multer = require('multer')
 
-
-
-
 module.exports = {
     admin_auth: (req,res,next)=>{
         if(req.session.adminLoggedin){
@@ -23,7 +20,7 @@ module.exports = {
                 req.session.destroy()
                 res.redirect('/login')
             }else{
-                next()
+                next()  
             }
         }else{
             next()
@@ -35,6 +32,14 @@ module.exports = {
             next()
         }else{
             res.redirect('/login')
+        }
+    },
+    SellerAuth: async(req,res,next)=>{
+        let seller = req.session.SellerLogin
+        if(seller){
+            next()
+        }else{
+            res.redirect('/seller/login')
         }
     }
 }

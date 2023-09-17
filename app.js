@@ -7,18 +7,15 @@ const session = require('express-session')
 const mongoose = require('./config/connection')
 const multer = require('multer')
 const flash = require('express-flash')
-
-
-
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin');
-
-
+const SellRouter = require('./routes/seller')
+// Env setup
+require('dotenv').config
 const app = express();
 
 
 // Database setup 
-
 mongoose()
 
 // view engine setup
@@ -48,15 +45,14 @@ app.use(flash());
 
 
 // Routes
-
 app.use('/', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/seller', SellRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

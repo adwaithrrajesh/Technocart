@@ -75,19 +75,22 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="account-login-inner">
+
                         <% if ( expressFlash.length > 0 ) { %>
-                            <p style="color: red; margin-left: 60px;"><%= expressFlash %> </p>
+                        <div class="alert alert-danger" role="alert">
+                            <%= expressFlash %>
+                          </div>
                         <% } %>
                         <!-- Form -->
 
-                        <form action="/login_req" class="ltn__form-box contact-form-box" method="post">
+                        <form action="/login" class="ltn__form-box contact-form-box" method="post">
                             <input type="text" name="Email" placeholder="Email*">
                             <input type="password" name="Password" placeholder="Password*">
                             <div class="btn-wrapper mt-0">
                                 <button class="theme-btn-1 btn btn-block" type="submit">Login</button>
                             </div>
                         </form>
-                        <a href="/forgot_password">Forgot Password</a>
+                        <a href="/forgot-password">Forgot Password</a>
                     </div>
                 </div>
                 <div class="col-lg-6">

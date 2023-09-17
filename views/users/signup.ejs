@@ -33,7 +33,9 @@
                         <p>Here you can Register your Account</p>
                              <br>
                              <% if ( expressFlash.length > 0 ) { %>
-                            <p style="color: red;"><%= expressFlash %> </p>
+                                <div class="alert alert-danger" role="alert">
+                                    <%= expressFlash %>
+                                  </div>
                           <% } %>
                     </div>
                 </div>

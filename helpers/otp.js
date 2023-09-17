@@ -1,6 +1,6 @@
 const accountSid = 'AC4a19c3b56443a134971980fb3829220d';
-const authToken = '1064e991c0c49cc3b02158574eeaf74d';
-const serviceId = 'VA39e87103e4bc52e3ac228cc086c80a86';
+const authToken = 'a6c79ea2a5b512d4f16e2e1f6c3d5da8';
+const serviceId = 'MG311492ef817c85b5969acccfaf0b2de6';
 
 
 module.exports={

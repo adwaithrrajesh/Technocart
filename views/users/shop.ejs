@@ -74,10 +74,10 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a class="dropdown-item" href="/sort_low">Price: Low to High</a>
+                                <a class="dropdown-item" href="/sort-low">Price: Low to High</a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="/sort_high">Price: High to Low</a>
+                                <a class="dropdown-item" href="/sort-high">Price: High to Low</a>
                               </li>
                             </ul>
                           </div>
@@ -144,8 +144,8 @@
                                       </h2>
                                     </a>
                                     <div class="product-price">
-                                      <span>₹<%= view.Price%></span>
-                                      <del>₹<%= view.DiscountPrice%></del>
+                                      <span>₹<%= view.DiscountPrice%></span>
+                                      <del>₹<%= view.Price%></del>
                                     </div>
                                   </div>
                                 </div>
@@ -181,7 +181,7 @@
                         </li>
                         <% Categories.forEach(function(category) { %>
                           <li>
-                            <a href="/category_opt?_id=<%=category._id%>&&cName=<%=category.CategoryName%>">
+                            <a href="/category-opt?_id=<%=category._id%>&&cName=<%=category.CategoryName%>">
                               <%=category.CategoryName%><span><i class="fas fa-long-arrow-alt-right"></i></span>
                             </a>
                           </li>

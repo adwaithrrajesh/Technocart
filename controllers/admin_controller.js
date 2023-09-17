@@ -19,7 +19,6 @@ const address_model = require('../model/address_model')
 
 
 module.exports = {
-
     // Admin_login
     login:(req,res)=>{
         if(req.session.adminLoggedin){
@@ -210,7 +209,7 @@ module.exports = {
     },
     OrderDetails:async(req,res)=>{
       let OrderId = req.params._id
-      adminHelper.OrderDetails(OrderId).then(async({Products,User})=>{
+      adminHelper.OrderDetails(OrderId).then(({Products,User})=>{
         res.render('admin/OrderManagement/Order_details',{Products,User})
       })
     },
