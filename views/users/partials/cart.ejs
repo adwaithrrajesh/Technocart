@@ -12,7 +12,7 @@
             <div class="mini-cart-product-area ltn__scrollbar">
                 <div class="mini-cart-item clearfix">
                     <div class="mini-cart-img">
-                        <a href="#"><img src="/images/products/<%=view.Product.Image[0].filename %>" alt="Image"></a>
+                        <a href="#"><img src="<%=view.Product.Image[0]%>" alt="Image"></a>
                         <span class="mini-cart-item-delete" onclick="RemoveProduct('<%=view.Product._id%>')">X</span>
                     </div>
                     <div class="mini-cart-info">
