@@ -38,7 +38,7 @@
                             <tbody>
                               <% products_view.forEach(function(product) { %>
                                 <tr>
-                                  <td><img src="/images/products/<%=product.Image[0].filename %>" alt=""
+                                  <td><img src="<%=product.Image[0]%>" alt=""
                                       style="width: 150px; height: 150px;" /></td>
                                   <td>
                                     <%= product.ProductName %>
